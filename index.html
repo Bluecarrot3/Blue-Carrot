@@ -2440,7 +2440,7 @@
         function showSugg(q) {
             suggIdx = -1;
             const f = q.length < 1 ? SUGGESTIONS.slice(0, 7) : SUGGESTIONS.filter(s => s.toLowerCase().includes(q.toLowerCase())).slice(0, 7);
-            if (!f.length) { sgit add.ox.classList.remove('open'); return; }
+            if (!f.length) { sbox.classList.remove('open'); return; }
             sbox.innerHTML = f.map(s => `<div class="sugg-item" data-val="${s}" onmousedown="pickSugg('${s}')"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>${s}</div>`).join('');
             sbox.classList.add('open');
         }
