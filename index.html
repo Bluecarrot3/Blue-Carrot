@@ -1207,19 +1207,84 @@
 
         @media(max-width:700px) {
             .msg-layout {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto 1fr;
-                min-height: 70vh
+                display: block;
+                position: relative;
+                overflow: hidden;
+                min-height: calc(100vh - 180px);
+                border-radius: 12px;
             }
-        }
 
-        @media(max-width:700px) {
             .msg-list {
-                max-height: 220px
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                transform: translateX(0);
+                transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+                z-index: 2;
+                background: var(--bg);
+                overflow-y: auto;
+            }
+
+            .msg-list.slide-out {
+                transform: translateX(-100%)
+            }
+
+            .chat-pane {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                transform: translateX(100%);
+                transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+                z-index: 3;
+                background: var(--bg);
+                display: flex;
+                flex-direction: column;
+            }
+
+            .chat-pane.slide-in {
+                transform: translateX(0)
+            }
+
+            .chat-back-btn {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                background: none;
+                border: none;
+                color: var(--blue);
+                font-size: .95rem;
+                font-weight: 600;
+                cursor: pointer;
+                padding: 4px 0 4px 4px;
+            }
+
+            .chat-back-btn svg {
+                width: 18px;
+                height: 18px;
+                stroke: currentColor;
+                fill: none;
+                stroke-width: 2.5
+            }
+
+            .chat-header {
+                padding: 12px 16px;
+                gap: 8px
             }
         }
 
-        @media(max-width:700px) {
+        @media(min-width:701px) {
+            .chat-back-btn {
+                display: none
+            }
+
+            .msg-list {
+                max-height: none
+            }
+
             .chat-pane {
                 min-height: 300px
             }
@@ -1357,9 +1422,39 @@
         @media(max-width:600px) {
             .profile-hero {
                 padding: 24px 16px;
-                flex-direction: column;
-                text-align: center;
-                align-items: center
+                flex-direction: row;
+                flex-wrap: nowrap;
+                align-items: center;
+                gap: 16px
+            }
+
+            .profile-avatar-lg {
+                width: 64px !important;
+                height: 64px !important;
+                min-width: 64px;
+                font-size: 1.3rem !important;
+                flex-shrink: 0
+            }
+
+            .profile-avatar-lg svg {
+                width: 64px !important;
+                height: 64px !important
+            }
+
+            .profile-info h2 {
+                font-size: 1.1rem
+            }
+
+            .profile-info p {
+                font-size: .82rem
+            }
+
+            .profile-tags {
+                flex-wrap: wrap
+            }
+
+            .connect-btn-wrap {
+                margin-top: 8px
             }
         }
 
@@ -1375,6 +1470,44 @@
             font-size: 2rem;
             font-weight: 700;
             flex-shrink: 0
+        }
+
+        /* When avatar contains SVG illustration, keep it contained */
+        #profileAvatar {
+            width: 90px;
+            height: 90px;
+            min-width: 90px;
+            min-height: 90px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--blue), var(--blue-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0
+        }
+
+        #profileAvatar svg {
+            width: 100%;
+            height: 100%;
+            flex-shrink: 0
+        }
+
+        @media(max-width:600px) {
+            #profileAvatar {
+                width: 72px;
+                height: 72px;
+                min-width: 72px;
+                min-height: 72px
+            }
+
+            .profile-info h2 {
+                font-size: 1.1rem
+            }
+
+            .profile-info p {
+                font-size: .82rem
+            }
         }
 
         .profile-info h2 {
@@ -2108,6 +2241,18 @@
                 bottom: 80px
             }
         }
+
+        @media(max-width:700px) {
+            .chat-header-desktop {
+                display: none !important
+            }
+        }
+
+        @media(min-width:701px) {
+            .chat-back-btn {
+                display: none !important
+            }
+        }
     </style>
 </head>
 
@@ -2380,8 +2525,7 @@
                 <!-- PROFILE -->
                 <div class="page" id="page-profile">
                     <div class="profile-hero">
-                        <div class="profile-avatar-lg" id="profileAvatar"
-                            style="background:none;padding:0;overflow:hidden"><svg xmlns="http://www.w3.org/2000/svg"
+                        <div class="profile-avatar-lg" id="profileAvatar"><svg xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 200 267">
                                 <g>
                                     <path
@@ -2872,11 +3016,26 @@
             list.innerHTML = MESSAGES_DATA.map((m, i) => `<div class="msg-item ${(i === mpActiveMsg ? 'active' : '')}" onclick="mpSelectMsg(${i})"><div class="msg-item-header"><span class="msg-item-name">${m.from}</span><span class="msg-item-time">${m.time}</span></div><div class="msg-item-prev">${m.preview}</div></div>`).join('');
             mpRenderChat(mpActiveMsg);
         }
-        function mpSelectMsg(i) { mpActiveMsg = i; document.querySelectorAll('#mpMsgList .msg-item').forEach((el, j) => el.classList.toggle('active', j === i)); mpRenderChat(i); }
+        function mpSelectMsg(i) {
+            mpActiveMsg = i;
+            document.querySelectorAll('#mpMsgList .msg-item').forEach((el, j) => el.classList.toggle('active', j === i));
+            mpRenderChat(i);
+            if (window.innerWidth <= 700) {
+                document.getElementById('mpMsgList').classList.add('slide-out');
+                document.getElementById('mpChatPane').classList.add('slide-in');
+            }
+        }
+        function mpGoBack() {
+            document.getElementById('mpMsgList').classList.remove('slide-out');
+            document.getElementById('mpChatPane').classList.remove('slide-in');
+        }
         function mpRenderChat(i) {
             const m = MESSAGES_DATA[i]; const pane = document.getElementById('mpChatPane'); if (!pane) return;
             const bubbles = m.chat.map(b => `<div class="msg-bubble ${(b.mine ? 'mine' : 'theirs')}">${b.text}</div>`).join('');
-            pane.innerHTML = `<div class="chat-header"><div class="avatar-placeholder" style="width:34px;height:34px;font-size:.75rem">${m.initials}</div>${m.from}</div><div class="chat-messages">${bubbles}</div><div class="chat-input"><input type="text" id="mpChatIn" placeholder="Type a message\u2026" onkeydown="mpSendMsg(event,${i})"/><button class="btn btn-primary" onclick="mpSendMsg({key:'Enter'},${i})">Send</button></div>`;
+            pane.innerHTML = `<div class="chat-header">
+    <button class="chat-back-btn" onclick="mpGoBack()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>${m.from}</button>
+    <div style="display:flex;align-items:center;gap:8px" class="chat-header-desktop"><div class="avatar-placeholder" style="width:34px;height:34px;font-size:.75rem">${m.initials}</div>${m.from}</div>
+    </div><div class="chat-messages">${bubbles}</div><div class="chat-input"><input type="text" id="mpChatIn" placeholder="Type a message\u2026" onkeydown="mpSendMsg(event,${i})"/><button class="btn btn-primary" onclick="mpSendMsg({key:'Enter'},${i})">Send</button></div>`;
         }
         function mpSendMsg(e, i) {
             if (e.key !== 'Enter') return; const inp = document.getElementById('mpChatIn'); const txt = inp.value.trim();
@@ -2910,11 +3069,29 @@
     </div>`).join('');
             renderChat(activeMsg);
         }
-        function selectMsg(i) { activeMsg = i; document.querySelectorAll('.msg-item').forEach((el, j) => el.classList.toggle('active', j === i)); renderChat(i); }
+        function selectMsg(i) {
+            activeMsg = i;
+            document.querySelectorAll('#msgList .msg-item').forEach((el, j) => el.classList.toggle('active', j === i));
+            renderChat(i);
+            // Telegram-style slide on mobile
+            if (window.innerWidth <= 700) {
+                document.getElementById('msgList').classList.add('slide-out');
+                document.getElementById('chatPane').classList.add('slide-in');
+            }
+        }
+        function msgGoBack() {
+            document.getElementById('msgList').classList.remove('slide-out');
+            document.getElementById('chatPane').classList.remove('slide-in');
+        }
         function renderChat(i) {
             const m = MESSAGES_DATA[i]; const pane = document.getElementById('chatPane');
             const bubbles = m.chat.map(b => `<div class="msg-bubble ${b.mine ? 'mine' : 'theirs'}">${b.text}</div>`).join('');
-            pane.innerHTML = `<div class="chat-header"><div class="avatar-placeholder" style="width:34px;height:34px;font-size:.75rem">${m.initials}</div>${m.from}</div>
+            pane.innerHTML = `<div class="chat-header">
+    <button class="chat-back-btn" onclick="msgGoBack()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>${m.from}</button>
+    <div style="display:flex;align-items:center;gap:8px" class="chat-header-desktop">
+      <div class="avatar-placeholder" style="width:34px;height:34px;font-size:.75rem">${m.initials}</div>${m.from}
+    </div>
+    </div>
     <div class="chat-messages">${bubbles}</div>
     <div class="chat-input"><input type="text" id="chatIn" placeholder="Type a message…" onkeydown="sendMsg(event,${i})"/>
       <button class="btn btn-primary" onclick="sendMsg({key:'Enter'},${i})">Send</button></div>`;
@@ -2922,6 +3099,7 @@
         function sendMsg(e, i) {
             if (e.key !== 'Enter') return; const inp = document.getElementById('chatIn'); const txt = inp.value.trim();
             if (!txt) return; MESSAGES_DATA[i].chat.push({ mine: true, text: txt }); inp.value = ''; renderChat(i);
+            if (window.innerWidth <= 700) { document.getElementById('chatPane').classList.add('slide-in'); }
             const m = document.querySelector('.chat-messages'); if (m) m.scrollTop = m.scrollHeight;
         }
 
