@@ -49,7 +49,8 @@
             z-index: 1000;
             display: flex;
             align-items: center;
-            justify-content: center
+            justify-content: center;
+            padding: 16px
         }
 
         .signin-card {
@@ -59,6 +60,13 @@
             max-width: 440px;
             width: 100%;
             box-shadow: 0 8px 40px rgba(0, 0, 0, .12)
+        }
+
+        @media(max-width:480px) {
+            .signin-card {
+                padding: 28px 20px;
+                border-radius: 16px
+            }
         }
 
         .signin-logo {
@@ -183,7 +191,10 @@
         }
 
         .btn-outline:hover {
-            background: #e8eeff
+            background: var(--blue);
+            color: #fff;
+            border-color: var(--blue);
+            transform: translateY(-2px) scale(1.04)
         }
 
         .btn-ghost {
@@ -193,8 +204,10 @@
         }
 
         .btn-ghost:hover {
-            border-color: var(--blue);
-            color: var(--blue)
+            background: var(--blue);
+            color: #fff;
+            border-color: transparent;
+            transform: translateY(-2px) scale(1.04)
         }
 
         .card .card-footer .btn-primary {
@@ -233,10 +246,19 @@
             display: flex;
             align-items: center;
             gap: 20px;
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 100;
+            left: 0;
+            right: 0;
+            z-index: 600;
             flex-shrink: 0
+        }
+
+        @media(max-width:600px) {
+            nav {
+                padding: 0 12px;
+                gap: 8px
+            }
         }
 
         .nav-logo {
@@ -246,6 +268,12 @@
             cursor: pointer;
             flex-shrink: 0;
             margin-left: 12px
+        }
+
+        @media(max-width:600px) {
+            .nav-logo {
+                margin-left: 0
+            }
         }
 
         .nav-logo-svg {
@@ -274,23 +302,40 @@
             left: 50%;
             transform: translateX(-50%);
             width: 480px;
-            max-width: calc(100% - 120px)
+            max-width: calc(100% - 200px);
+            display: flex;
+            align-items: center;
+            background: #eeede9;
+            border: 1.5px solid var(--border);
+            border-radius: 999px;
+            padding: 0 16px 0 40px;
+            transition: border .2s
+        }
+
+        @media(max-width:600px) {
+            .search-wrap {
+                position: relative;
+                left: auto;
+                transform: none;
+                width: 100%;
+                max-width: 100%;
+                margin: 0 8px
+            }
+        }
+
+        .search-wrap:focus-within {
+            border-color: var(--blue);
+            background: #fff
         }
 
         .search-wrap input {
-            width: 100%;
-            padding: 10px 16px 10px 40px;
-            border: 1.5px solid var(--border);
-            border-radius: 999px;
-            font-size: .95rem;
+            flex: 1;
+            background: transparent;
+            border: none;
             outline: none;
-            transition: border .2s;
-            background: #eeede9
-        }
-
-        .search-wrap input:focus {
-            border-color: var(--blue);
-            background: #fff
+            padding: 10px 0;
+            font-size: .95rem;
+            font-family: inherit
         }
 
         .search-icon {
@@ -348,12 +393,13 @@
         #belowNav {
             display: flex;
             flex: 1;
-            overflow: hidden
+            overflow: hidden;
+            margin-top: 64px
         }
 
         /* ── LOGO DROPDOWN ── */
         #logoDropdown {
-            position: absolute;
+            position: fixed;
             top: 68px;
             left: 30px;
             background: none;
@@ -364,7 +410,7 @@
             align-items: flex-start;
             padding: 0;
             gap: 2px;
-            z-index: 200;
+            z-index: 601;
             pointer-events: none;
             opacity: 0;
             transform: translateY(-8px);
@@ -429,10 +475,16 @@
         /* ── PAGES ── */
         .page {
             display: none;
-            padding: 32px 24px 64px;
+            padding: 32px 90px 64px;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%
+        }
+
+        @media(max-width:768px) {
+            .page {
+                padding: 20px 16px 80px
+            }
         }
 
         .page.active {
@@ -455,6 +507,14 @@
         .home-hero h1 .brand-font {
             font-size: 2.2rem;
             color: var(--blue)
+        }
+
+        @media(max-width:600px) {
+
+            .home-hero h1,
+            .home-hero h1 .brand-font {
+                font-size: 1.6rem
+            }
         }
 
         .home-hero p {
@@ -643,6 +703,12 @@
             line-height: 1.2
         }
 
+        @media(max-width:600px) {
+            .detail-title {
+                font-size: 1.4rem
+            }
+        }
+
         .detail-meta {
             display: flex;
             gap: 12px;
@@ -734,6 +800,20 @@
             stroke-width: 2.5
         }
 
+        .detail-prof-icon {
+            transition: transform .22s ease, opacity .22s ease;
+            cursor: pointer;
+            display: inline-flex;
+            width: 80px;
+            height: 80px;
+            overflow: hidden
+        }
+
+        .detail-prof-icon:hover {
+            transform: translateY(-3px) scale(1.06);
+            opacity: .75
+        }
+
         .mp-toggle {
             display: flex;
             gap: 0;
@@ -770,6 +850,23 @@
             align-items: center;
             justify-content: center;
             padding: 20px
+        }
+
+        @media(max-width:600px) {
+            .modal-overlay {
+                padding: 12px;
+                align-items: flex-end
+            }
+        }
+
+        @media(max-width:600px) {
+            .modal {
+                border-radius: 20px 20px 0 0;
+                max-height: 92vh;
+                overflow-y: auto;
+                width: 100%;
+                max-width: 100%
+            }
         }
 
         .modal-overlay.open {
@@ -1023,101 +1120,6 @@
             min-height: 80px
         }
 
-        /* ── MEDIA UPLOAD ── */
-        .media-upload-area {
-            border: 2px dashed var(--border);
-            border-radius: 12px;
-            padding: 24px 16px;
-            text-align: center;
-            cursor: pointer;
-            background: #fafafa;
-            transition: border-color .2s, background .2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .media-upload-area:hover,
-        .media-upload-area.drag-over {
-            border-color: var(--blue);
-            background: #f0f5ff
-        }
-
-        .media-file-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: #fff;
-            border: 1.5px solid var(--border);
-            border-radius: 10px;
-            padding: 9px 12px;
-            font-size: .82rem;
-        }
-
-        .media-file-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: .7rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .media-file-info {
-            flex: 1;
-            min-width: 0
-        }
-
-        .media-file-name {
-            font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            color: var(--text)
-        }
-
-        .media-file-size {
-            color: var(--muted);
-            font-size: .75rem;
-            margin-top: 1px
-        }
-
-        .media-file-remove {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--muted);
-            padding: 4px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            transition: color .15s
-        }
-
-        .media-file-remove:hover {
-            color: #e55
-        }
-
-        .media-progress-bar {
-            height: 3px;
-            border-radius: 2px;
-            background: var(--border);
-            margin-top: 5px;
-            overflow: hidden;
-        }
-
-        .media-progress-fill {
-            height: 100%;
-            background: var(--blue);
-            border-radius: 2px;
-            width: 0%;
-            transition: width .4s ease;
-        }
-
         /* ── MY PROJECTS ── */
         .applied-card {
             background: #fff;
@@ -1197,27 +1199,56 @@
             display: grid;
             grid-template-columns: 280px 1fr;
             gap: 0;
-            background: #fff;
+            background: var(--bg);
             border-radius: 18px;
-            border: 1.5px solid var(--border);
             overflow: hidden;
             min-height: 520px
         }
 
+        @media(max-width:700px) {
+            .msg-layout {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 1fr;
+                min-height: 70vh
+            }
+        }
+
+        @media(max-width:700px) {
+            .msg-list {
+                max-height: 220px
+            }
+        }
+
+        @media(max-width:700px) {
+            .chat-pane {
+                min-height: 300px
+            }
+        }
+
         .msg-list {
-            border-right: 1px solid var(--border);
-            overflow-y: auto
+            overflow-y: auto;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px
         }
 
         .msg-item {
+            background: transparent;
+            border-radius: 14px;
+            border: none;
             padding: 14px 16px;
             cursor: pointer;
-            border-bottom: 1px solid var(--border);
-            transition: background .15s
+            transition: transform .22s ease;
+            break-inside: avoid
         }
 
-        .msg-item:hover,
+        .msg-item:hover {
+            transform: translateY(-6px) scale(1.02)
+        }
+
         .msg-item.active {
+            border-color: var(--blue);
             background: #f0f4ff
         }
 
@@ -1321,6 +1352,15 @@
             align-items: center;
             margin-bottom: 32px;
             flex-wrap: wrap
+        }
+
+        @media(max-width:600px) {
+            .profile-hero {
+                padding: 24px 16px;
+                flex-direction: column;
+                text-align: center;
+                align-items: center
+            }
         }
 
         .profile-avatar-lg {
@@ -1492,6 +1532,12 @@
             margin-bottom: 16px
         }
 
+        @media(max-width:600px) {
+            .about-hero h1 {
+                font-size: 1.8rem
+            }
+        }
+
         .about-hero h1 .brand-font {
             color: var(--blue)
         }
@@ -1611,16 +1657,467 @@
         .toast.show {
             transform: translateX(-50%) translateY(0)
         }
+
+        /* ── LANDING PAGE ── */
+        #landingPage {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column
+        }
+
+        #landingNav {
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            flex-shrink: 0;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            z-index: 2
+        }
+
+        @media(max-width:480px) {
+            #landingNav {
+                padding: 0 16px
+            }
+        }
+
+        .landing-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: "Times New Roman", serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer
+        }
+
+        .landing-logo svg {
+            height: 40px;
+            width: auto
+        }
+
+        .landing-auth-btns {
+            display: flex;
+            gap: 10px
+        }
+
+        .landing-scroll {
+            flex: 1;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            -webkit-overflow-scrolling: touch
+        }
+
+        .ls {
+            min-height: 100vh;
+            min-height: 100dvh;
+            scroll-snap-align: start;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 60px 40px;
+            text-align: center
+        }
+
+        @media(max-width:600px) {
+            .ls {
+                padding: 40px 20px
+            }
+        }
+
+        #ls-intro {
+            background: var(--bg)
+        }
+
+        #ls-show {
+            background: #f0f4ff
+        }
+
+        #ls-discover {
+            background: #fff8f0
+        }
+
+        #ls-connect {
+            background: #f0fff4
+        }
+
+        #ls-auth {
+            background: var(--bg);
+            justify-content: center
+        }
+
+        .ls-label {
+            font-size: .8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--blue);
+            margin-bottom: 14px
+        }
+
+        .ls-headline {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -.03em;
+            margin-bottom: 16px;
+            line-height: 1.1;
+            color: var(--text)
+        }
+
+        @media(max-width:600px) {
+            .ls-headline {
+                font-size: 2rem
+            }
+        }
+
+        .ls-headline .brand-font {
+            color: var(--blue)
+        }
+
+        .ls-sub {
+            font-size: 1.15rem;
+            color: var(--muted);
+            max-width: 520px;
+            line-height: 1.75;
+            margin-bottom: 36px
+        }
+
+        @media(max-width:600px) {
+            .ls-sub {
+                font-size: 1rem;
+                margin-bottom: 24px
+            }
+        }
+
+        .ls-cta {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+
+        .ls-auth-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 40px 36px;
+            max-width: 440px;
+            width: 100%;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, .12)
+        }
+
+        /* ── CREATE PAGE ── */
+        .page-sub {
+            color: var(--muted);
+            margin-bottom: 28px;
+            font-size: .97rem
+        }
+
+        .create-types-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 32px
+        }
+
+        @media(max-width:700px) {
+            .create-types-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        .create-type-card {
+            background: var(--bg);
+            border-radius: 18px;
+            border: 1.5px solid transparent;
+            padding: 28px 20px;
+            text-align: center;
+            cursor: pointer
+        }
+
+        .create-type-card .create-type-icon,
+        .create-type-card .create-type-title,
+        .create-type-card .create-type-desc {
+            transition: transform .22s ease
+        }
+
+        .create-type-card:hover .create-type-icon,
+        .create-type-card:hover .create-type-title,
+        .create-type-card:hover .create-type-desc {
+            transform: translateY(-6px)
+        }
+
+        .create-type-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: #e8eeff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px
+        }
+
+        .create-type-icon svg {
+            width: 26px;
+            height: 26px;
+            stroke: var(--blue);
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round
+        }
+
+        .create-type-title {
+            font-weight: 700;
+            margin-bottom: 4px;
+            font-size: .95rem
+        }
+
+        .create-type-desc {
+            font-size: .82rem;
+            color: var(--muted)
+        }
+
+        .create-form-area {
+            background: #fff;
+            border-radius: 18px;
+            padding: 28px;
+            border: 1.5px solid var(--border);
+            margin-top: 8px
+        }
+
+        .create-form-area h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .create-form-area .back-to-types {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--blue);
+            font-size: .9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0;
+            transition: transform .22s ease, opacity .22s ease
+        }
+
+        .create-form-area .back-to-types:hover {
+            transform: translateY(-3px) scale(1.06);
+            opacity: .75
+        }
+
+        .create-preview-label {
+            font-size: .82rem;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: .05em;
+            margin-top: 24px;
+            margin-bottom: 10px
+        }
+
+        .create-preview-card {
+            background: #f4f4f1;
+            border-radius: 14px;
+            overflow: hidden;
+            max-width: 280px
+        }
+
+        .create-preview-card .preview-img {
+            height: 160px;
+            background: linear-gradient(135deg, var(--blue), var(--blue-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem
+        }
+
+        .create-preview-card .preview-body {
+            padding: 12px;
+            background: #fff
+        }
+
+        .create-preview-card .preview-title {
+            font-weight: 700;
+            font-size: .9rem;
+            margin-bottom: 4px
+        }
+
+        .create-preview-card .preview-role {
+            font-size: .78rem;
+            color: var(--muted)
+        }
+
+        .step-counter-input {
+            display: flex;
+            flex-direction: column;
+            gap: 10px
+        }
+
+        .step-item-input {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start
+        }
+
+        .step-item-input span {
+            background: var(--blue);
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 8px
+        }
+
+        /* ── SEARCH FILTER ── */
+        #jobTitlePanel {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .1);
+            z-index: 650;
+            display: none;
+            flex-wrap: wrap;
+            gap: 6px
+        }
+
+        #jobTitlePanel.open {
+            display: flex
+        }
+
+        .job-chip-btn {
+            padding: 5px 13px;
+            border-radius: 999px;
+            font-size: .78rem;
+            font-weight: 600;
+            border: 1.5px solid var(--border);
+            background: #fafafa;
+            cursor: pointer;
+            transition: all .15s;
+            color: var(--muted)
+        }
+
+        .job-chip-btn:hover,
+        .job-chip-btn.selected {
+            background: var(--blue);
+            color: #fff;
+            border-color: var(--blue)
+        }
+
+        #searchTagsWrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-right: 4px
+        }
+
+        .selected-job-chip {
+            background: var(--blue);
+            color: #fff;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: .75rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: background .15s
+        }
+
+        .selected-job-chip:hover {
+            background: #3a6abd
+        }
+
+        /* ── MOBILE BOTTOM NAV ── */
+        @media(max-width:600px) {
+            #logoDropdown {
+                position: fixed;
+                bottom: 0;
+                top: auto;
+                left: 0;
+                right: 0;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                background: #f8f8f5;
+                border-top: 1px solid var(--border);
+                padding: 6px 0 max(6px, env(safe-area-inset-bottom));
+                opacity: 1 !important;
+                transform: none !important;
+                pointer-events: all !important;
+                border-radius: 0;
+                gap: 0;
+                display: flex !important;
+                z-index: 601;
+            }
+
+            #logoDropdown .sb-btn {
+                width: auto;
+                flex: 1;
+                padding: 6px 0;
+                border-radius: 0
+            }
+
+            #logoDropdown .sb-btn span {
+                opacity: 1;
+                font-size: .6rem
+            }
+
+            /* Override the open/closed logic — always show on mobile */
+            body #logoDropdown {
+                opacity: 1;
+                transform: none;
+                pointer-events: all
+            }
+
+            /* Give content extra bottom padding for the nav bar */
+            #mainCol {
+                padding-bottom: 64px
+            }
+
+            .toast {
+                bottom: 80px
+            }
+        }
     </style>
 </head>
 
 <body>
 
-    <!-- ── SIGN-IN ── -->
-    <div id="signInScreen">
-        <div class="signin-card">
-            <div class="signin-logo">
-                <svg style="height:80px;width:auto" viewBox="0 0 595.2 419.52" overflow="visible"
+    <!-- ── LANDING PAGE ── -->
+    <div id="landingPage">
+        <nav id="landingNav" style="display:none">
+            <div class="landing-logo" onclick="goToAuthSection()">
+                <svg style="height:40px;width:auto" viewBox="0 0 595.2 419.52" overflow="visible"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M539.0685,218.3814 L550.665,240.2965 L546.4379,240.2449 L543.6382,242.468 L541.539,241.8573 L539.2209,240.6572 L539.3657,243.4134 L535.4806,244.5788 L531.2067,241.9192 L522.61,239.2464 L521.3674,240.6335 L519.9752,242.7494 L517.8634,241.899 L517.4208,244.2054 L511.9435,247.2568 L503.2475,246.2715 L496.8681,242.8814 L495.5123,242.1114 L493.6865,237.6082 L491.5054,235.9117 L490.9399,232.842 L490.8591,228.1567 L489.1627,226.5411 L488.1933,227.2681 L488.7588,228.8837 L487.5471,233.7306 L487.951,239.6277 L485.6303,243.5917 L481.2949,243.3387 L473.9359,242.7639 L468.5035,241.473 L469.2286,238.2705 L468.8851,235.0936 L467.5972,234.4926 L466.7943,239.1735 L465.9077,240.1814 L462.5697,238.8968 L463.2421,236.2389 L462.5033,234.7614 L459.7802,222.4491 L449.0694,211.216 L439.3033,211.6647 L429.1384,213.9743 L426.1515,213.6587 L425.8459,212.3782 L425.7184,210.8704 L425.9755,209.7944 L426.3166,208.1972 L426.5179,207.0206 L426.5944,206.5965 L427.2966,202.8716 L427.8139,202.4335 L429.2002,201.8877 L430.4381,201.8002 L455.2381,202.5159 L455.1564,201.1146 L468.8369,192.9064 L480.1678,190.0142 L489.6208,190.9492 L495.1014,190.9619 L495.7277,193.5772 L489.7898,197.002 L490.0204,198.8403 L489.2881,200.0131 L514.6335,199.4888 L522.4681,201.9613 L527.4708,202.9083 L538.3228,206.9389 L538.9376,210.0416 L535.4372,211.9565 L540.2987,217.2113 z"
@@ -1629,56 +2126,113 @@
                         d="M401.192,246.1486 L392.7073,245.8376 L392.4461,244.6421 L392.8655,241.2895 L394.6054,239.4729 L394.2458,237.8118 L389.675,234.9196 L387.5806,234.1218 L386.4836,232.4264 L385.8852,227.0409 L386.7828,216.8685 L386.4441,198.2057 L386.0515,197.0279 L385.07,196.3736 L384.154,197.8785 L383.8268,200.2995 L383.4996,207.4972 L382.7799,218.0319 L380.5552,226.0147 L378.0687,232.3617 L376.2366,237.5309 L373.881,242.5038 L370.8056,244.336 L365.0475,245.9064 L356.5412,245.9718 L339.9212,245.5792 L338.6126,244.4014 L338.3509,242.1767 L339.8558,237.9235 L341.4916,230.4642 L340.9806,227.6629 L339.7288,227.5933 L339.1376,228.7409 L338.2682,233.0528 L336.6339,237.2952 L335.1052,240.2494 L330.4258,243.8985 L324.2867,244.242 L321.7538,244.7317 L319.135,244.0588 L314.125,244.3002 L306.0841,242.8138 L301.5334,243.1258 L299.6016,243.0399 L298.8718,242.1813 L298.6571,240.3353 L299.9043,237.2257 L302.3278,230.7632 L303.6202,220.3424 L302.1662,212.5874 L300.389,209.76 L299.0965,209.4369 L298.0463,209.76 L297.4809,212.1027 L297.9655,214.93 L298.7733,219.8577 L298.1271,226.2394 L297.5616,228.8244 L297.4001,235.0446 L294.4919,239.8915 L290.9376,244.3345 L287.1408,244.6576 L275.4275,242.6381 L271.9539,241.5879 L269.6112,239.4876 L265.249,239.1645 L247.881,239.0837 L242.9593,239.3058 L241.2628,239.7904 L239.1625,240.0117 L234.8318,241.0032 L226.7222,240.981 L224.7834,240.0925 L218.3209,241.2445 L193.888,241.8362 L192.2137,240.2477 L191.9991,238.4447 L192.8147,235.6542 L194.2744,233.3788 L199.1255,229.3863 L200.2735,228.1301 L200.6429,222.5896 L199.9041,217.2952 L196.826,209.9078 L193.7137,204.7429 L192.0707,203.8949 L190.2686,204.6369 L189.8446,205.9619 L191.4877,208.6119 L192.6007,213.488 L192.3357,217.7811 L191.1385,221.5619 L190.3658,234.5698 L189.8506,235.8577 L187.5678,238.148 L180.088,238.7464 L141.1932,235.954 L139.6972,234.7572 L139.8967,232.0645 L142.1905,225.2828 L142.8886,220.1966 L142.0908,214.3125 L141.4924,211.919 L140.6945,210.423 L139.2983,212.0187 L139.2983,216.5066 L138.7997,222.6898 L138.0018,228.3745 L135.2402,234.0967 L134.5103,232.8947 L133.6088,230.0613 L129.3111,226.9646 L118.7397,224.7706 L96.6993,223.1749 L82.43787,223.2746 L64.98508,223.4741 L63.18993,221.8784 L62.89074,220.4822 L62.39209,219.3851 L49.72634,219.2854 L48.72904,218.7868 L38.35709,215.6951 L37.65898,214.7976 L36.86113,213.2019 L39.65358,211.9054 L58.8018,211.4067 L75.65621,210.6089 L103.3812,203.8272 L116.6454,201.5334 L129.3111,200.8739 L138.4863,200.8079 L148.7585,197.179 L154.847,197.2634 L164.2039,193.272 L173.5609,192.814 L182.0672,192.3559 L189.7228,191.1127 L197.5748,192.0288 L206.35,189.4886 L209.4197,189.0847 L210.9545,190.2964 L216.1246,196.7589 L220.8099,205.968 L222.4255,215.2579 L222.7486,217.3582 L224.3643,218.4891 L225.576,217.9237 L225.7376,214.6116 L225.3336,208.4722 L222.991,200.3133 L218.7903,192.3967 L215.8137,189.1748 L215.8137,187.9631 L218.1564,187.9631 L225.9114,189.1748 L235.4436,188.2862 L241.9869,186.7514 L269.6142,185.5397 L290.9923,185.3904 L293.3302,188.0381 L294.3442,188.1226 L295.5554,187.7001 L295.8652,184.2074 L296.3995,182.9893 L303.5971,180.6991 L310.533,179.9139 L329.4351,179.6802 L330.4225,180.2812 L338.1501,190.5416 L338.794,190.4987 L339.438,189.4684 L339.3092,179.9378 L339.9531,178.6499 L347.8826,176.6066 L370.322,174.612 L371.5187,175.5095 L372.516,179.0001 L373.4967,180.5546 L375.7757,180.3426 L376.3587,179.1766 L376.6767,177.4806 L378.2137,176.5266 L386.9059,174.4066 L397.665,174.0356 L406.3041,174.9366 L409.9082,177.9046 L415.3962,191.3988 L416.3503,193.0949 L416.1913,195.9039 L414.0182,197.8119 L413.5942,198.2359 L414.1242,199.614 L416.6683,201.628 L420.3783,202.688 L421.0143,203.642 L420.5373,205.126 L418.8413,212.6521 L416.6683,221.0263 L415.1312,221.5563 L413.5412,222.1393 L411.4742,225.4783 L408.5061,230.1954 L406.5981,233.9055 L406.0151,236.9795 L406.1211,241.1136 L405.0081,243.4986 L403.3651,245.1416 z"
                         fill="#65A1F4" />
                 </svg>
-                <span class="signin-logo-text">Blue Carrot</span>
+                <span>Blue Carrot</span>
             </div>
-            <p class="signin-sub">The creative collaboration platform</p>
-            <div class="si-tabs">
-                <div class="si-tab active" onclick="switchSiTab('login')">Sign In</div>
-                <div class="si-tab" onclick="switchSiTab('register')">Create Account</div>
+            <div class="landing-auth-btns">
+                <button class="btn btn-outline" onclick="goToAuthSection()">Log In</button>
+                <button class="btn btn-outline" onclick="enterApp()">Sign Up</button>
             </div>
-            <div class="si-form active" id="si-login">
-                <div class="si-group"><label>Email</label><input type="text" id="li-email"
-                        placeholder="you@example.com" /></div>
-                <div class="si-group"><label>Password</label><input type="password" id="li-pw" placeholder="••••••••" />
+        </nav>
+        <div class="landing-scroll" id="landingScroll">
+            <!-- Section 1: Intro -->
+            <section class="ls" id="ls-intro">
+                <p class="ls-label">Blue Carrot</p>
+                <h1 class="ls-headline">Where creatives<br>find their people.</h1>
+                <p class="ls-sub">Share your work, discover talent, and build real connections with artists, designers,
+                    filmmakers, and makers.</p>
+                <div class="ls-cta">
+                    <button class="btn btn-outline" style="padding:12px 28px;font-size:.95rem" onclick="enterApp()">Get
+                        Started</button>
+                    <button class="btn btn-outline" style="padding:12px 28px;font-size:.95rem"
+                        onclick="goToAuthSection()">Log In</button>
                 </div>
-                <button class="btn btn-primary btn-full" onclick="doSignIn()">Sign In</button>
-            </div>
-            <div class="si-form" id="si-register">
-                <div class="si-group"><label>Name</label><input type="text" id="reg-name" placeholder="Ada Lovelace" />
+            </section>
+            <!-- Section 2: Show -->
+            <section class="ls" id="ls-show">
+                <p class="ls-label">Show</p>
+                <h2 class="ls-headline">Your portfolio,<br>beautifully presented.</h2>
+                <p class="ls-sub">Upload photos, videos, writing, and projects. Build a profile that actually shows what
+                    you do — and who you are.</p>
+            </section>
+            <!-- Section 3: Discover -->
+            <section class="ls" id="ls-discover">
+                <p class="ls-label">Discover</p>
+                <h2 class="ls-headline">Find work<br>that moves you.</h2>
+                <p class="ls-sub">Browse portfolios by creative discipline. Filter by job title to find exactly the
+                    talent you're looking for.</p>
+            </section>
+            <!-- Section 4: Connect -->
+            <section class="ls" id="ls-connect">
+                <p class="ls-label">Connect</p>
+                <h2 class="ls-headline">Collaborate with<br>other creatives.</h2>
+                <p class="ls-sub">Send a message, make a connection. The right people are already here — you just need
+                    to find them.</p>
+            </section>
+            <!-- Section 5: Auth -->
+            <section class="ls" id="ls-auth">
+                <div class="ls-auth-card">
+                    <div class="signin-logo">
+                        <svg style="height:60px;width:auto" viewBox="0 0 595.2 419.52" overflow="visible"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M539.0685,218.3814 L550.665,240.2965 L546.4379,240.2449 L543.6382,242.468 L541.539,241.8573 L539.2209,240.6572 L539.3657,243.4134 L535.4806,244.5788 L531.2067,241.9192 L522.61,239.2464 L521.3674,240.6335 L519.9752,242.7494 L517.8634,241.899 L517.4208,244.2054 L511.9435,247.2568 L503.2475,246.2715 L496.8681,242.8814 L495.5123,242.1114 L493.6865,237.6082 L491.5054,235.9117 L490.9399,232.842 L490.8591,228.1567 L489.1627,226.5411 L488.1933,227.2681 L488.7588,228.8837 L487.5471,233.7306 L487.951,239.6277 L485.6303,243.5917 L481.2949,243.3387 L473.9359,242.7639 L468.5035,241.473 L469.2286,238.2705 L468.8851,235.0936 L467.5972,234.4926 L466.7943,239.1735 L465.9077,240.1814 L462.5697,238.8968 L463.2421,236.2389 L462.5033,234.7614 L459.7802,222.4491 L449.0694,211.216 L439.3033,211.6647 L429.1384,213.9743 L426.1515,213.6587 L425.8459,212.3782 L425.7184,210.8704 L425.9755,209.7944 L426.3166,208.1972 L426.5179,207.0206 L426.5944,206.5965 L427.2966,202.8716 L427.8139,202.4335 L429.2002,201.8877 L430.4381,201.8002 L455.2381,202.5159 L455.1564,201.1146 L468.8369,192.9064 L480.1678,190.0142 L489.6208,190.9492 L495.1014,190.9619 L495.7277,193.5772 L489.7898,197.002 L490.0204,198.8403 L489.2881,200.0131 L514.6335,199.4888 L522.4681,201.9613 L527.4708,202.9083 L538.3228,206.9389 L538.9376,210.0416 L535.4372,211.9565 L540.2987,217.2113 z"
+                                fill="#5383C8" />
+                            <path
+                                d="M401.192,246.1486 L392.7073,245.8376 L392.4461,244.6421 L392.8655,241.2895 L394.6054,239.4729 L394.2458,237.8118 L389.675,234.9196 L387.5806,234.1218 L386.4836,232.4264 L385.8852,227.0409 L386.7828,216.8685 L386.4441,198.2057 L386.0515,197.0279 L385.07,196.3736 L384.154,197.8785 L383.8268,200.2995 L383.4996,207.4972 L382.7799,218.0319 L380.5552,226.0147 L378.0687,232.3617 L376.2366,237.5309 L373.881,242.5038 L370.8056,244.336 L365.0475,245.9064 L356.5412,245.9718 L339.9212,245.5792 L338.6126,244.4014 L338.3509,242.1767 L339.8558,237.9235 L341.4916,230.4642 L340.9806,227.6629 L339.7288,227.5933 L339.1376,228.7409 L338.2682,233.0528 L336.6339,237.2952 L335.1052,240.2494 L330.4258,243.8985 L324.2867,244.242 L321.7538,244.7317 L319.135,244.0588 L314.125,244.3002 L306.0841,242.8138 L301.5334,243.1258 L299.6016,243.0399 L298.8718,242.1813 L298.6571,240.3353 L299.9043,237.2257 L302.3278,230.7632 L303.6202,220.3424 L302.1662,212.5874 L300.389,209.76 L299.0965,209.4369 L298.0463,209.76 L297.4809,212.1027 L297.9655,214.93 L298.7733,219.8577 L298.1271,226.2394 L297.5616,228.8244 L297.4001,235.0446 L294.4919,239.8915 L290.9376,244.3345 L287.1408,244.6576 L275.4275,242.6381 L271.9539,241.5879 L269.6112,239.4876 L265.249,239.1645 L247.881,239.0837 L242.9593,239.3058 L241.2628,239.7904 L239.1625,240.0117 L234.8318,241.0032 L226.7222,240.981 L224.7834,240.0925 L218.3209,241.2445 L193.888,241.8362 L192.2137,240.2477 L191.9991,238.4447 L192.8147,235.6542 L194.2744,233.3788 L199.1255,229.3863 L200.2735,228.1301 L200.6429,222.5896 L199.9041,217.2952 L196.826,209.9078 L193.7137,204.7429 L192.0707,203.8949 L190.2686,204.6369 L189.8446,205.9619 L191.4877,208.6119 L192.6007,213.488 L192.3357,217.7811 L191.1385,221.5619 L190.3658,234.5698 L189.8506,235.8577 L187.5678,238.148 L180.088,238.7464 L141.1932,235.954 L139.6972,234.7572 L139.8967,232.0645 L142.1905,225.2828 L142.8886,220.1966 L142.0908,214.3125 L141.4924,211.919 L140.6945,210.423 L139.2983,212.0187 L139.2983,216.5066 L138.7997,222.6898 L138.0018,228.3745 L135.2402,234.0967 L134.5103,232.8947 L133.6088,230.0613 L129.3111,226.9646 L118.7397,224.7706 L96.6993,223.1749 L82.43787,223.2746 L64.98508,223.4741 L63.18993,221.8784 L62.89074,220.4822 L62.39209,219.3851 L49.72634,219.2854 L48.72904,218.7868 L38.35709,215.6951 L37.65898,214.7976 L36.86113,213.2019 L39.65358,211.9054 L58.8018,211.4067 L75.65621,210.6089 L103.3812,203.8272 L116.6454,201.5334 L129.3111,200.8739 L138.4863,200.8079 L148.7585,197.179 L154.847,197.2634 L164.2039,193.272 L173.5609,192.814 L182.0672,192.3559 L189.7228,191.1127 L197.5748,192.0288 L206.35,189.4886 L209.4197,189.0847 L210.9545,190.2964 L216.1246,196.7589 L220.8099,205.968 L222.4255,215.2579 L222.7486,217.3582 L224.3643,218.4891 L225.576,217.9237 L225.7376,214.6116 L225.3336,208.4722 L222.991,200.3133 L218.7903,192.3967 L215.8137,189.1748 L215.8137,187.9631 L218.1564,187.9631 L225.9114,189.1748 L235.4436,188.2862 L241.9869,186.7514 L269.6142,185.5397 L290.9923,185.3904 L293.3302,188.0381 L294.3442,188.1226 L295.5554,187.7001 L295.8652,184.2074 L296.3995,182.9893 L303.5971,180.6991 L310.533,179.9139 L329.4351,179.6802 L330.4225,180.2812 L338.1501,190.5416 L338.794,190.4987 L339.438,189.4684 L339.3092,179.9378 L339.9531,178.6499 L347.8826,176.6066 L370.322,174.612 L371.5187,175.5095 L372.516,179.0001 L373.4967,180.5546 L375.7757,180.3426 L376.3587,179.1766 L376.6767,177.4806 L378.2137,176.5266 L386.9059,174.4066 L397.665,174.0356 L406.3041,174.9366 L409.9082,177.9046 L415.3962,191.3988 L416.3503,193.0949 L416.1913,195.9039 L414.0182,197.8119 L413.5942,198.2359 L414.1242,199.614 L416.6683,201.628 L420.3783,202.688 L421.0143,203.642 L420.5373,205.126 L418.8413,212.6521 L416.6683,221.0263 L415.1312,221.5563 L413.5412,222.1393 L411.4742,225.4783 L408.5061,230.1954 L406.5981,233.9055 L406.0151,236.9795 L406.1211,241.1136 L405.0081,243.4986 L403.3651,245.1416 z"
+                                fill="#65A1F4" />
+                        </svg>
+                        <span class="signin-logo-text">Blue Carrot</span>
+                    </div>
+                    <p class="signin-sub">The creative portfolio platform</p>
+                    <div class="si-tabs">
+                        <div class="si-tab active" onclick="switchSiTab('login')">Sign In</div>
+                        <div class="si-tab" onclick="switchSiTab('register')">Create Account</div>
+                    </div>
+                    <div class="si-form active" id="si-login">
+                        <div class="si-group"><label>Email</label><input type="text" id="li-email"
+                                placeholder="you@example.com" /></div>
+                        <div class="si-group"><label>Password</label><input type="password" id="li-pw"
+                                placeholder="••••••••" /></div>
+                        <button class="btn btn-outline btn-full" onclick="enterApp()">Sign In</button>
+                    </div>
+                    <div class="si-form" id="si-register">
+                        <div class="si-group"><label>Name</label><input type="text" id="reg-name"
+                                placeholder="Ada Lovelace" /></div>
+                        <div class="si-group"><label>Email</label><input type="text" id="reg-email"
+                                placeholder="you@example.com" /></div>
+                        <div class="si-group"><label>City &amp; Country</label><input type="text" id="reg-loc"
+                                placeholder="Oslo, Norway" /></div>
+                        <div class="si-group"><label>Primary Creative Role</label>
+                            <select id="reg-role">
+                                <option value="">— Select —</option>
+                                <option>Illustrator</option>
+                                <option>Animator</option>
+                                <option>Character Designer</option>
+                                <option>Cinematographer</option>
+                                <option>Director</option>
+                                <option>Editor</option>
+                                <option>Sound Designer</option>
+                                <option>Composer</option>
+                                <option>Photographer</option>
+                                <option>Game Designer</option>
+                                <option>3D Artist</option>
+                                <option>Motion Designer</option>
+                                <option>Graphic Designer</option>
+                                <option>Creative Coder</option>
+                                <option>Producer</option>
+                                <option>Stylist</option>
+                                <option>Makeup Artist</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="si-group"><label>Short Bio</label><textarea id="reg-bio"
+                                placeholder="Tell collaborators a bit about yourself…"
+                                style="resize:vertical;min-height:60px;width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:10px;font-size:.9rem;font-family:inherit;outline:none;background:#fafafa"></textarea>
+                        </div>
+                        <button class="btn btn-outline btn-full" onclick="enterApp()">Create Account</button>
+                    </div>
                 </div>
-                <div class="si-group"><label>Email</label><input type="text" id="reg-email"
-                        placeholder="you@example.com" /></div>
-                <div class="si-group"><label>City &amp; Country</label><input type="text" id="reg-loc"
-                        placeholder="Oslo, Norway" /></div>
-                <div class="si-group"><label>Primary Creative Role</label>
-                    <select id="reg-role">
-                        <option value="">— Select —</option>
-                        <option>Illustrator</option>
-                        <option>Animator</option>
-                        <option>Character Designer</option>
-                        <option>Cinematographer</option>
-                        <option>Director</option>
-                        <option>Editor</option>
-                        <option>Sound Designer</option>
-                        <option>Composer</option>
-                        <option>Photographer</option>
-                        <option>Game Designer</option>
-                        <option>3D Artist</option>
-                        <option>Motion Designer</option>
-                        <option>Graphic Designer</option>
-                        <option>Creative Coder</option>
-                        <option>Producer</option>
-                        <option>Stylist</option>
-                        <option>Makeup Artist</option>
-                        <option>Other</option>
-                    </select>
-                </div>
-                <div class="si-group"><label>Short Bio</label><textarea id="reg-bio"
-                        placeholder="Tell collaborators a bit about yourself…"
-                        style="resize:vertical;min-height:60px;width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:10px;font-size:.9rem;font-family:inherit;outline:none;background:#fafafa"></textarea>
-                </div>
-                <button class="btn btn-primary btn-full" onclick="doRegister()">Create Account</button>
-            </div>
+            </section>
         </div>
     </div>
 
@@ -1704,14 +2258,14 @@
                 <span class="nav-logo-text"><span>Blue Carrot</span></span>
             </div>
             <div class="search-wrap" id="searchWrap">
-                <span class="search-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2.5">
+                <span class="search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px">
                         <circle cx="11" cy="11" r="8" />
-                        <path d="m21 21-4.35-4.35" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
                     </svg></span>
-                <input type="text" id="searchInput" placeholder="Search projects, roles, tags…"
-                    aria-label="Search projects" autocomplete="off" />
-                <div class="suggestions" id="suggestions" role="listbox"></div>
+                <div id="searchTagsWrap"></div>
+                <input type="text" id="searchInput" placeholder="Search portfolios, roles…" autocomplete="off" />
+                <div id="jobTitlePanel"></div>
             </div>
         </nav>
 
@@ -1734,7 +2288,7 @@
                 </svg>
                 <span>Home</span>
             </button>
-            <button class="sb-btn" onclick="ddNav('my-projects')" aria-label="My Projects">
+            <button class="sb-btn" onclick="ddNav('my-projects')" aria-label="Messages">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 267">
                     <g>
                         <path
@@ -1745,7 +2299,7 @@
                             fill="rgba(55,69,89,1)" />
                     </g>
                 </svg>
-                <span>Projects</span>
+                <span>Messages</span>
             </button>
             <button class="sb-btn" onclick="ddNav('create')" aria-label="Create a Project">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 267">
@@ -1776,22 +2330,6 @@
                 </svg>
                 <span>Profile</span>
             </button>
-            <button class="sb-btn" onclick="ddNav('about')" aria-label="About Us">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 267">
-                    <g>
-                        <path
-                            d="M 106.03 123.79 C106.06,124.46 106.95,123.46 107.75,122.21 C105.38,128.33 104.60,133.26 104.92,139.00 C105.08,142.02 105.34,148.32 105.48,153.00 C105.65,158.37 106.29,165.88 107.11,172.78 C106.30,167.71 106.25,167.71 106.06,171.50 C105.86,175.59 104.22,180.88 104.05,178.00 C104.01,177.18 103.56,175.85 103.06,175.06 C101.82,173.11 99.01,175.40 98.98,178.37 C98.96,181.46 97.58,183.16 95.68,182.43 C93.58,181.63 88.25,170.87 85.92,162.73 L 84.73 158.57 C84.90,156.50 85.06,154.92 85.22,154.00 C85.83,150.43 86.44,145.93 86.56,144.00 C86.87,139.25 87.54,134.68 89.01,127.27 C90.10,121.82 90.04,120.61 88.56,117.49 C88.54,117.45 88.52,117.41 88.51,117.37 C88.65,117.01 88.81,116.16 89.05,114.75 C89.40,112.69 90.50,110.10 91.50,109.00 C93.46,106.83 93.04,105.76 91.14,106.52 C91.22,106.47 91.32,106.42 91.41,106.37 C93.56,105.16 97.33,103.88 99.79,103.51 C102.24,103.14 104.85,102.61 105.57,102.34 C106.16,102.11 107.08,102.95 108.17,104.65 L 108.44 108.28 C108.60,110.36 108.99,112.32 109.31,112.64 C109.62,112.96 109.01,115.44 107.94,118.15 C106.87,120.86 106.01,123.39 106.03,123.79 ZM 107.70 67.34 C107.89,66.83 107.79,66.23 107.48,65.62 C107.57,65.75 107.65,65.88 107.71,66.02 C108.47,67.51 108.98,67.88 108.99,66.94 C108.99,66.08 107.65,64.08 106.00,62.50 C104.35,60.92 103.00,59.37 103.01,59.06 C103.01,58.75 104.47,57.67 106.25,56.66 C109.43,54.84 109.50,54.85 110.99,56.94 C115.27,62.97 115.93,63.54 116.88,62.10 C118.01,60.38 121.00,61.37 121.00,63.47 C121.00,64.31 121.43,65.00 121.95,65.00 C122.84,65.00 121.37,60.82 119.92,58.37 C121.88,61.27 123.21,66.27 122.59,70.15 C122.18,72.72 122.37,74.75 123.12,75.64 C124.96,77.87 122.81,81.33 116.81,85.79 C111.96,89.38 106.40,92.00 103.60,92.00 C103.25,92.00 102.04,91.57 100.45,90.90 C101.50,90.44 102.12,86.85 101.22,85.70 C100.70,85.04 99.99,81.01 99.65,76.75 C99.07,69.57 99.17,69.00 100.94,69.00 C102.33,69.00 102.66,68.89 102.07,67.51 C102.13,67.60 102.19,67.68 102.24,67.75 C103.67,69.54 106.95,69.29 107.70,67.34 ZM 83.34 197.47 C83.38,194.21 83.47,189.93 83.59,184.36 C83.70,179.33 83.87,174.23 84.08,169.64 L 84.07 171.59 C84.03,179.88 83.70,191.51 83.34,197.47 ZM 101.60 217.91 C99.45,221.17 97.15,223.73 95.37,224.41 C95.14,224.50 94.84,224.43 94.49,224.23 C95.76,224.51 97.32,222.92 100.71,219.00 C101.02,218.64 101.31,218.28 101.60,217.91 ZM 108.02 202.63 C107.84,204.82 106.91,207.69 105.59,210.63 C106.45,208.41 107.23,205.81 108.02,202.63 ZM 111.53 113.56 C111.38,114.11 111.11,114.70 110.74,115.45 C110.12,116.74 109.54,117.96 109.02,119.14 C109.16,118.32 109.83,116.71 110.64,115.31 C111.05,114.60 111.34,114.05 111.53,113.56 ZM 86.08 81.74 C82.93,78.70 80.34,75.31 78.93,72.16 C80.25,75.12 82.94,78.62 86.08,81.74 ZM 101.98 62.00 C101.93,62.00 101.87,62.00 101.82,62.00 C100.82,62.00 100.35,62.18 100.29,62.79 C100.28,62.53 100.32,62.34 100.42,62.25 C100.73,61.94 101.29,61.88 101.98,62.00 ZM 108.61 105.37 C108.92,105.89 109.23,106.48 109.56,107.12 C109.96,107.90 110.29,108.57 110.57,109.16 C110.46,108.94 110.34,108.72 110.22,108.47 L 108.61 105.37 ZM 109.73 189.15 C109.99,190.58 110.08,191.74 110.01,192.83 C110.05,191.80 109.96,190.74 109.73,189.15 ZM 117.73 56.26 C117.03,55.96 116.57,56.01 116.28,56.46 C116.42,56.18 116.58,56.01 116.75,56.02 C117.08,56.02 117.40,56.11 117.73,56.26 ZM 92.09 221.65 C90.99,219.87 89.78,216.40 89.41,213.95 C89.78,216.39 90.99,219.86 92.11,221.68 C92.11,221.67 92.10,221.66 92.09,221.65 ZM 88.24 209.25 C88.72,210.26 89.08,211.79 89.41,213.95 C89.08,211.80 88.71,210.27 88.24,209.25 Z"
-                            fill="rgba(51,64,83,1)" />
-                        <path
-                            d="M 95.00 88.55 C88.85,85.33 81.44,77.77 78.93,72.16 C76.53,66.77 76.17,56.51 78.22,52.23 C80.17,48.17 86.73,45.02 94.29,44.52 C100.06,44.14 101.22,44.39 105.13,46.90 C110.67,50.47 113.87,53.95 114.97,57.62 C115.70,60.07 115.84,60.17 115.91,58.25 C115.94,57.69 115.99,57.24 116.09,56.90 C116.35,57.41 117.11,58.08 118.25,58.64 C119.39,59.21 120.44,59.73 120.70,59.85 C121.83,62.21 122.67,65.00 121.95,65.00 C121.43,65.00 121.00,64.31 121.00,63.47 C121.00,61.37 118.01,60.38 116.88,62.10 C115.93,63.54 115.27,62.97 110.99,56.94 C109.50,54.85 109.43,54.84 106.25,56.66 C104.47,57.67 103.01,58.75 103.01,59.06 C103.00,59.37 104.35,60.92 106.00,62.50 C107.65,64.08 108.99,66.08 108.99,66.94 C108.98,67.88 108.47,67.51 107.71,66.02 C106.47,63.56 101.62,61.05 100.42,62.25 C100.07,62.59 100.48,64.25 101.32,65.94 C102.76,68.82 102.73,69.00 100.94,69.00 C99.17,69.00 99.07,69.57 99.65,76.75 C99.99,81.01 100.70,85.04 101.22,85.70 C102.20,86.94 101.39,91.04 100.18,90.95 C99.81,90.93 97.47,89.85 95.00,88.55 ZM 102.00 215.17 C102.00,216.28 102.13,216.77 102.46,216.73 C101.92,217.52 101.34,218.27 100.71,219.00 C99.85,220.00 99.11,220.84 98.46,221.54 C98.21,221.56 97.74,221.77 97.12,222.16 C95.34,223.27 94.77,223.20 93.28,221.70 C91.82,220.25 91.51,218.09 91.49,209.22 C91.47,203.33 91.08,197.90 90.62,197.17 C90.10,196.35 88.87,196.07 87.39,196.44 C85.30,196.96 85.00,196.69 84.98,194.27 C84.97,192.11 84.75,191.83 84.00,193.00 C83.81,193.29 83.63,193.96 83.48,194.87 C83.78,188.53 84.04,178.80 84.07,171.59 L 84.14 156.50 L 85.92 162.73 C88.25,170.87 93.58,181.63 95.68,182.43 C97.58,183.16 98.96,181.46 98.98,178.37 C99.01,175.40 101.82,173.11 103.06,175.06 C103.56,175.85 104.01,177.18 104.05,178.00 C104.22,180.88 105.86,175.59 106.06,171.50 C106.25,167.65 106.30,167.71 107.14,173.00 C107.63,176.02 108.49,181.43 109.07,185.00 C109.48,187.49 109.75,189.14 109.90,190.43 C109.90,190.43 109.89,190.42 109.89,190.42 C109.26,188.81 109.13,188.93 109.07,191.20 C109.02,193.06 107.43,195.47 104.00,198.90 C99.69,203.21 99.00,204.45 99.00,207.85 C99.00,210.43 99.52,211.98 100.50,212.36 C101.32,212.68 102.00,213.94 102.00,215.17 ZM 106.03 123.79 C106.01,123.39 106.87,120.86 107.94,118.15 C109.01,115.44 109.62,112.96 109.31,112.64 C108.99,112.32 108.60,110.36 108.44,108.28 L 108.16 104.50 L 110.22 108.47 C112.16,112.22 112.19,112.61 110.64,115.31 C109.74,116.88 109.00,118.71 109.00,119.39 C109.00,120.69 106.09,125.01 106.03,123.79 ZM 87.72 116.00 C86.45,111.42 86.94,109.08 89.53,107.39 C92.70,105.31 93.93,106.32 91.50,109.00 C90.50,110.10 89.40,112.69 89.05,114.75 C88.46,118.21 88.36,118.31 87.72,116.00 ZM 109.93 193.72 C109.80,194.91 109.48,196.27 108.99,198.50 C108.65,200.04 108.32,201.46 107.99,202.78 C108.02,202.50 108.04,202.26 108.04,202.04 C108.07,200.64 108.66,197.89 109.37,195.92 C109.62,195.22 109.81,194.46 109.93,193.72 ZM 83.02 203.16 C83.05,207.79 83.34,208.14 84.96,207.72 C86.51,207.31 87.51,207.69 88.24,209.25 C87.50,207.67 86.46,207.33 84.80,207.76 C83.17,208.19 82.80,208.21 83.02,203.16 ZM 117.44 56.15 C117.77,56.25 118.17,56.46 118.64,56.77 C118.86,56.91 119.11,57.18 119.37,57.54 C118.71,56.95 117.97,56.40 117.44,56.15 Z"
-                            fill="rgba(58,73,94,1)" />
-                        <path
-                            d="M 92.12 221.70 C91.00,219.89 89.78,216.40 89.41,213.95 C88.58,208.52 87.53,207.05 84.96,207.72 C83.15,208.19 83.00,207.70 83.02,201.37 C83.02,197.59 83.47,193.82 84.00,193.00 C84.75,191.83 84.97,192.11 84.98,194.27 C85.00,196.69 85.30,196.96 87.39,196.44 C88.87,196.07 90.10,196.35 90.62,197.17 C91.08,197.90 91.47,203.33 91.49,209.22 C91.51,218.09 91.82,220.25 93.28,221.70 C94.77,223.20 95.34,223.27 97.12,222.16 C98.27,221.44 98.91,221.33 98.55,221.92 C98.19,222.51 97.05,223.44 96.02,223.99 C94.48,224.82 93.81,224.42 92.12,221.70 ZM 102.00 215.17 C102.00,213.94 101.32,212.68 100.50,212.36 C99.52,211.98 99.00,210.43 99.00,207.85 C99.00,204.45 99.69,203.21 104.00,198.90 C107.43,195.47 109.02,193.06 109.07,191.20 C109.13,188.93 109.26,188.81 109.89,190.42 C110.31,191.49 110.08,193.94 109.37,195.92 C108.66,197.89 108.07,200.64 108.04,202.04 C107.99,205.16 104.71,214.69 103.15,216.25 C102.28,217.12 102.00,216.85 102.00,215.17 ZM 118.25 58.64 C115.98,57.51 115.22,56.00 116.93,56.00 C117.86,56.00 121.00,58.76 121.00,59.57 C121.00,59.81 120.89,59.94 120.75,59.88 C120.61,59.81 119.49,59.25 118.25,58.64 Z"
-                            fill="rgba(68,85,108,1)" />
-                    </g>
-                </svg>
-                <span>About</span>
-            </button>
         </div>
 
         <!-- BELOW NAV: full width content -->
@@ -1808,33 +2346,23 @@
 
                 <!-- DETAIL -->
                 <div class="page" id="page-detail">
-                    <button class="back-btn" onclick="showPage('home')" aria-label="Back to projects">
+                    <button class="back-btn" onclick="showPage('home')" aria-label="Back">
                         <svg viewBox="0 0 24 24">
                             <polyline points="15 18 9 12 15 6" />
                         </svg>
-                        Back to Projects
+                        Back
                     </button>
                     <div id="detailContent"></div>
                 </div>
 
-                <!-- MY PROJECTS -->
+                <!-- MESSAGES -->
                 <div class="page" id="page-my-projects">
-                    <div style="margin-bottom:16px">
-                        <h2 style="font-size:1.5rem;font-weight:800">My Projects</h2>
-                        <div class="mp-toggle">
-                            <button class="mp-tab active" id="mpTabConv"
-                                onclick="mpSwitch('conv')">Conversations</button>
-                            <button class="mp-tab" id="mpTabApplied" onclick="mpSwitch('applied')">Applied</button>
-                        </div>
+                    <div style="margin-bottom:20px">
+                        <h2 style="font-size:1.5rem;font-weight:800">Messages</h2>
                     </div>
-                    <div id="mpConvSection">
-                        <div class="msg-layout">
-                            <div class="msg-list" id="mpMsgList"></div>
-                            <div class="chat-pane" id="mpChatPane"></div>
-                        </div>
-                    </div>
-                    <div id="mpAppliedSection" style="display:none">
-                        <div id="appliedList"></div>
+                    <div class="msg-layout">
+                        <div class="msg-list" id="mpMsgList"></div>
+                        <div class="chat-pane" id="mpChatPane"></div>
                     </div>
                 </div>
 
@@ -1868,77 +2396,29 @@
                             <h2 id="profileName">—</h2>
                             <p id="profileMeta">—</p>
                             <div class="profile-tags" id="profileTags"></div>
+                            <div class="connect-btn-wrap">
+                                <button class="btn btn-outline" id="connectBtn" onclick="connectWithUser()"
+                                    style="margin-top:14px">Connect</button>
+                            </div>
                         </div>
                     </div>
                     <div id="openProjectsSection" style="display:none;margin-bottom:32px">
                         <div class="section-label">Open Projects</div>
                         <div id="openProjectsList"></div>
                     </div>
-                    <div class="profile-toggle">
-                        <button class="profile-tab active" id="tabPortfolio" onclick="switchProfileTab('portfolio')">+
-                            Portfolio</button>
-                        <button class="profile-tab" id="tabProjects"
-                            onclick="switchProfileTab('projects')">Projects</button>
-                    </div>
                     <div id="portfolioView">
                         <div class="work-grid" id="workGrid"></div>
                         <button class="add-portfolio-btn" onclick="openAddPortfolioModal()"
                             aria-label="Add portfolio item">+</button>
                     </div>
-                    <div id="projectsView" style="display:none">
-                        <div id="acceptedProjectsList"></div>
-                    </div>
                 </div>
 
-                <!-- ABOUT -->
-                <div class="page" id="page-about">
-                    <div class="about-hero">
-                        <h1>Welcome to <span class="brand-font">Blue Carrot</span></h1>
-                        <p>We're building a home for the next generation of creatives — a place where young artists,
-                            filmmakers, musicians, designers, and storytellers can find each other and make something
-                            real together.</p>
-                    </div>
-                    <div class="about-cards">
-                        <div class="about-card">
-                            <div class="ab-icon"><svg viewBox="0 0 24 24">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="M8 14s1.5 2 4 2 4-2 4-2" />
-                                    <line x1="9" y1="9" x2="9.01" y2="9" />
-                                    <line x1="15" y1="9" x2="15.01" y2="9" />
-                                </svg></div>
-                            <h3>For Every Creative</h3>
-                            <p>Whether you're a 3D artist, sound designer, photographer, or game dev — Blue Carrot is
-                                for you.</p>
-                        </div>
-                        <div class="about-card">
-                            <div class="ab-icon"><svg viewBox="0 0 24 24">
-                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                                    <circle cx="9" cy="7" r="4" />
-                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                                </svg></div>
-                            <h3>Real Collaborations</h3>
-                            <p>We match makers with makers. Browse real projects, apply to join, and build your
-                                portfolio.</p>
-                        </div>
-                        <div class="about-card">
-                            <div class="ab-icon"><svg viewBox="0 0 24 24">
-                                    <path d="M12 2a10 10 0 1 0 10 10" />
-                                    <path d="M12 6v6l4 2" />
-                                </svg></div>
-                            <h3>Starting Out? Perfect.</h3>
-                            <p>Blue Carrot is designed for emerging artists. No gatekeeping — just passion and creative
-                                vision.</p>
-                        </div>
-                    </div>
-                    <div
-                        style="text-align:center;margin-top:48px;padding:36px;background:#fff;border-radius:18px;border:1.5px solid var(--border)">
-                        <h2 style="font-size:1.6rem;font-weight:800;margin-bottom:12px">Ready to start creating?</h2>
-                        <p style="color:var(--muted);margin-bottom:20px;font-size:.97rem">Browse projects and find your
-                            next creative partner today.</p>
-                        <button class="btn btn-primary" style="font-size:1rem;padding:12px 32px"
-                            onclick="showPage('home')">Explore Projects</button>
-                    </div>
+                <!-- CREATE -->
+                <div class="page" id="page-create">
+                    <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:8px">Create</h2>
+                    <p class="page-sub">What would you like to share?</p>
+                    <div class="create-types-grid" id="createTypesGrid"></div>
+                    <div id="createFormArea" style="display:none"></div>
                 </div>
             </div><!-- /mainCol -->
         </div><!-- /belowNav -->
@@ -1972,27 +2452,6 @@
                     placeholder="One sentence about the project" /></div>
             <div class="cp-group"><label>Full Description</label><textarea id="cp-desc"
                     placeholder="Describe the project, timeline, and what you're looking for…"></textarea></div>
-            <div class="cp-group">
-                <label>Upload Media</label>
-                <div class="media-upload-area" id="mediaUploadArea"
-                    onclick="document.getElementById('cp-media').click()" ondragover="mediaDragOver(event)"
-                    ondragleave="mediaDragLeave(event)" ondrop="mediaDrop(event)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"
-                        style="color:var(--blue);margin-bottom:8px">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                        <polyline points="17 8 12 3 7 8" />
-                        <line x1="12" y1="3" x2="12" y2="15" />
-                    </svg>
-                    <div style="font-weight:600;font-size:.88rem;color:var(--text)">Drag & drop files here</div>
-                    <div style="font-size:.78rem;color:var(--muted);margin-top:4px">or click to browse</div>
-                    <div style="font-size:.74rem;color:var(--muted);margin-top:6px">MP4, MP3, MOV, WAV, PNG, JPG, PDF ·
-                        Max 100 MB each</div>
-                    <input type="file" id="cp-media" multiple
-                        accept="video/mp4,video/quicktime,video/webm,audio/mpeg,audio/wav,audio/ogg,image/png,image/jpeg,image/gif,image/webp,application/pdf"
-                        style="display:none" onchange="mediaFilesSelected(this.files)" />
-                </div>
-                <div id="mediaFileList" style="margin-top:10px;display:flex;flex-direction:column;gap:8px"></div>
-            </div>
             <div class="cp-group"><label>Roles Needed (comma-separated)</label><input type="text" id="cp-roles"
                     placeholder="e.g. Cinematographer, Editor, Composer" /></div>
             <div class="cp-group"><label>Tags (comma-separated)</label><input type="text" id="cp-tags"
@@ -2213,26 +2672,20 @@
             document.getElementById('si-register').classList.toggle('active', tab === 'register');
         }
         function doSignIn() {
-            const email = document.getElementById('li-email').value.trim();
-            if (!email) { showToast('Please enter your email.'); return; }
-            userProfile = { name: 'Alex Jordan', email, location: 'Oslo, Norway', role: 'Illustrator', bio: 'Illustrator and animator. Open to creative collaborations.' };
-            launchApp();
+            enterApp();
         }
         function doRegister() {
-            const name = document.getElementById('reg-name').value.trim();
-            const email = document.getElementById('reg-email').value.trim();
-            const loc = document.getElementById('reg-loc').value.trim();
-            const role = document.getElementById('reg-role').value;
-            const bio = document.getElementById('reg-bio').value.trim();
-            if (!name || !email || !role) { showToast('Please fill in name, email and role.'); return; }
-            userProfile = { name, email, location: loc || 'Somewhere in the North', role, bio };
-            launchApp();
+            enterApp();
         }
         function launchApp() {
-            document.getElementById('signInScreen').style.display = 'none';
+            const lp = document.getElementById('landingPage');
+            if (lp) lp.style.display = 'none';
             renderGrid(PROJECTS);
             renderMessages();
             renderProfile();
+        }
+        function initApp() {
+            launchApp();
         }
 
         // ── SIDEBAR ───────────────────────────────────────────────────────────────────
@@ -2253,8 +2706,8 @@
             sidebarOpen = false;
             document.getElementById('logoDropdown').classList.remove('open');
             document.getElementById('navLogoSvg').classList.remove('rotated');
-            if (page === 'create') { openCreateProject(); return; }
             showPage(page);
+            if (page === 'create') renderCreateTypes();
         }
 
         // ── ROUTING ───────────────────────────────────────────────────────────────────
@@ -2281,16 +2734,16 @@
 </g></svg>`;
         function cardHTML(p) {
             const svg = p.svgIdx != null ? PROJECT_SVGS[p.svgIdx % 5] : (p.customSvg || PROJECT_SVGS[0]);
-            const roles = p.roles.slice(0, 3).map(r => `<span class="chip chip-role">${r}</span>`).join('');
+            const roles = p.tags.slice(0, 3).map(r => `<span class="chip chip-role">${r}</span>`).join('');
             return `<div class="card" onclick="openProject(${p.id})" tabindex="0" role="article" aria-label="${p.title}">
     <div class="card-img-wrap">${svg}</div>
     <div class="card-body">
-      <div class="card-title" style="font-size:.85rem;color:var(--muted);font-weight:600">${daysLeft(p)}</div>
+      <div class="card-title">${p.title}</div>
       <div class="card-desc">${p.summary}</div>
-      <div class="chips">${roles}<span class="chip chip-loc">${p.location}</span></div>
+      <div class="chips">${roles}</div>
       <div class="card-footer">
         <div class="creator"><span style="display:inline-flex;width:26px;height:26px;flex-shrink:0;overflow:hidden">${PROF_SVG}</span>${p.creator.name}</div>
-        <button class="btn btn-primary" onclick="event.stopPropagation();openApplyModal(${p.id})">Apply</button>
+        <button class="btn btn-primary" onclick="event.stopPropagation();showCreatorProfile(${p.id})">View Profile</button>
       </div>
     </div>
   </div>`;
@@ -2300,26 +2753,25 @@
         function openProject(id) {
             const p = PROJECTS.find(x => x.id === id); if (!p) return;
             const svg = p.svgIdx != null ? PROJECT_SVGS[p.svgIdx % 5] : (p.customSvg || PROJECT_SVGS[0]);
-            const tags = p.tags.map(t => `<span class="chip chip-tag">${t}</span>`).join('');
-            const roles = p.roles.map(r => `<li style="padding:5px 0;font-size:.92rem;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)"><span style="color:var(--blue)">&#10022;</span>${r}</li>`).join('');
+            const tags = p.tags.map(t => `<span class="chip chip-role">${t}</span>`).join('');
+            const roles = `<li style="padding:5px 0;font-size:.92rem;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)"><span style="color:var(--blue)">&#10022;</span>${p.creator.name}</li>`;
             const applied = appliedIds.has(id);
-            const descHTML = p.description.split('\n\n').map(para => `<p style="margin-bottom:14px">${para}</p>`).join('');
+            const descHTML = p.description.split('\n\n').slice(0, 1).map(para => `<p style="margin-bottom:14px">${para}</p>`).join('');
             document.getElementById('detailContent').innerHTML = `
     <div class="detail-cover">${svg}</div>
     <div class="detail-header">
       <h1 class="detail-title">${p.title}</h1>
-      <button class="btn ${applied ? 'btn-outline' : 'btn-primary'}" style="font-size:.95rem;padding:10px 24px;flex-shrink:0" id="applyBtn" onclick="openApplyModal(${p.id})">${applied ? '&#10003; Applied' : 'Apply to Collaborate'}</button>
     </div>
     <div class="detail-meta">
       <span class="detail-meta-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${p.location}</span>
       <span class="detail-meta-item"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>${p.date}</span>${tags}
     </div>
     <div class="detail-section"><h3>About this Project</h3><div class="detail-desc">${descHTML}</div></div>
-    <div class="detail-section"><h3>Roles Needed</h3><ul style="list-style:none;padding:0">${roles}</ul></div>
-    <div class="detail-section"><h3>About the Creator</h3>
-      <div class="creator-card"><span style="display:inline-flex;width:48px;height:48px;flex-shrink:0;overflow:hidden">${PROF_SVG}</span>
-        <div class="creator-info"><h4>${p.creator.name}</h4><p>Creative on Blue Carrot</p></div>
-      </div>
+    <div class="detail-section"><h3>People Involved</h3><div style="font-size:.92rem;padding:5px 0">${p.creator.name}</div></div>
+    <div class="detail-section"><h3>People</h3>
+      <span class="detail-prof-icon" onclick="showCreatorProfile(${p.id})" title="${p.creator.name}">
+        ${PROF_SVG}
+      </span>
     </div>`;
             showPage('detail');
         }
@@ -2386,61 +2838,6 @@
 
         // ── CREATE PROJECT ────────────────────────────────────────────────────────────
         function openCreateProject() { document.getElementById('cpModal').classList.add('open'); }
-        // ── MEDIA UPLOAD ─────────────────────────────────────────────────────────────
-        let uploadedMediaFiles = [];
-        const MEDIA_COLORS = { video: '#5383C8', audio: '#9B59B6', image: '#27AE60', pdf: '#E74C3C', other: '#888' };
-        const MEDIA_LABELS = { video: 'VID', audio: 'AUD', image: 'IMG', pdf: 'PDF', other: 'FILE' };
-        function mediaType(file) {
-            if (file.type.startsWith('video/')) return 'video';
-            if (file.type.startsWith('audio/')) return 'audio';
-            if (file.type.startsWith('image/')) return 'image';
-            if (file.type === 'application/pdf') return 'pdf';
-            return 'other';
-        }
-        function mediaSize(bytes) {
-            if (bytes < 1024) return bytes + ' B';
-            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
-        }
-        function mediaDragOver(e) { e.preventDefault(); document.getElementById('mediaUploadArea').classList.add('drag-over'); }
-        function mediaDragLeave() { document.getElementById('mediaUploadArea').classList.remove('drag-over'); }
-        function mediaDrop(e) { e.preventDefault(); mediaDragLeave(); mediaFilesSelected(e.dataTransfer.files); }
-        function mediaFilesSelected(files) {
-            const maxSize = 100 * 1024 * 1024;
-            [...files].forEach(file => {
-                if (file.size > maxSize) { showToast(`${file.name} is over 100 MB — skipped.`); return; }
-                if (uploadedMediaFiles.find(f => f.name === file.name && f.size === file.size)) return;
-                uploadedMediaFiles.push(file);
-            });
-            renderMediaFileList();
-        }
-        function removeMediaFile(idx) { uploadedMediaFiles.splice(idx, 1); renderMediaFileList(); }
-        function renderMediaFileList() {
-            const el = document.getElementById('mediaFileList');
-            if (!uploadedMediaFiles.length) { el.innerHTML = ''; return; }
-            el.innerHTML = uploadedMediaFiles.map((f, i) => {
-                const type = mediaType(f);
-                const color = MEDIA_COLORS[type];
-                const label = MEDIA_LABELS[type];
-                return `<div class="media-file-item">
-                    <div class="media-file-icon" style="background:${color}">${label}</div>
-                    <div class="media-file-info">
-                        <div class="media-file-name">${f.name}</div>
-                        <div class="media-file-size">${mediaSize(f.size)}</div>
-                        <div class="media-progress-bar"><div class="media-progress-fill" id="mpf-${i}"></div></div>
-                    </div>
-                    <button class="media-file-remove" onclick="removeMediaFile(${i})" title="Remove">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    </button>
-                </div>`;
-            }).join('');
-            // Animate progress bars to simulate "ready" state
-            uploadedMediaFiles.forEach((_, i) => setTimeout(() => {
-                const bar = document.getElementById('mpf-' + i);
-                if (bar) bar.style.width = '100%';
-            }, 80 + i * 60));
-        }
-
         function submitCreateProject() {
             const title = document.getElementById('cp-title').value.trim();
             const summary = document.getElementById('cp-summary').value.trim();
@@ -2458,22 +2855,16 @@
                 location: loc || 'Remote', date: new Date().toISOString().slice(0, 10),
                 svgIdx: Math.floor(Math.random() * PROJECT_SVGS.length)
             };
-            np.mediaFiles = uploadedMediaFiles.map(f => ({ name: f.name, size: f.size, type: mediaType(f) }));
             myCreatedProjects.push(np); PROJECTS.push(np);
             renderGrid(PROJECTS);
             document.getElementById('cpModal').classList.remove('open');
             ['cp-title', 'cp-summary', 'cp-desc', 'cp-roles', 'cp-tags', 'cp-loc'].forEach(id => document.getElementById(id).value = '');
-            uploadedMediaFiles = []; renderMediaFileList();
             showToast('Project posted! Visible on your profile.'); renderProfile();
         }
 
         // ── MY PROJECTS ───────────────────────────────────────────────────────────────
         function mpSwitch(view) {
-            document.getElementById('mpConvSection').style.display = view === 'conv' ? '' : 'none';
-            document.getElementById('mpAppliedSection').style.display = view === 'applied' ? '' : 'none';
-            document.getElementById('mpTabConv').classList.toggle('active', view === 'conv');
-            document.getElementById('mpTabApplied').classList.toggle('active', view === 'applied');
-            if (view === 'applied') renderApplied(); else mpRenderMessages();
+            // Applied view removed
         }
         function mpRenderMessages() {
             const list = document.getElementById('mpMsgList');
@@ -2494,6 +2885,7 @@
         }
         function renderApplied() {
             const el = document.getElementById('appliedList');
+            if (!el) return;
             if (!appliedIds.size) {
                 el.innerHTML = `<div class="empty"><div class="empty-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h3>No applications yet</h3><p>Browse projects and hit Apply to get started.</p></div>`;
                 return;
@@ -2557,10 +2949,6 @@
             document.getElementById('workGrid').innerHTML = WORK_LABELS.map((label, i) => `
     <div class="work-item">${WORK_SVGS[i]}<div class="work-item-label">${label}</div></div>`).join('') +
                 myPortfolioItems.map(item => `<div class="work-item">${PROJECT_SVGS[item.svgIdx]}<div class="work-item-label">${item.title}${item.role ? ' \u00B7 ' + item.role : ''}</div></div>`).join('');
-            document.getElementById('portfolioView').style.display = 'block';
-            document.getElementById('projectsView').style.display = 'none';
-            document.getElementById('tabPortfolio').classList.add('active');
-            document.getElementById('tabProjects').classList.remove('active');
         }
 
 
@@ -2598,17 +2986,11 @@
             document.getElementById('addPortfolioModal').classList.remove('open');
             renderProfile();
             showToast('Added to portfolio!');
-        } let suggIdx = -1;
-        const inp = document.getElementById('searchInput'); const sbox = document.getElementById('suggestions');
-        inp.addEventListener('focus', () => showSugg(inp.value));
-        inp.addEventListener('input', () => { showSugg(inp.value); filterProjects(inp.value); });
-        inp.addEventListener('blur', () => setTimeout(() => sbox.classList.remove('open'), 150));
+        }
+        const inp = document.getElementById('searchInput');
+        inp.addEventListener('input', () => { filterProjects(inp.value); });
         inp.addEventListener('keydown', e => {
-            const items = sbox.querySelectorAll('.sugg-item');
-            if (e.key === 'ArrowDown') { e.preventDefault(); suggIdx = Math.min(suggIdx + 1, items.length - 1); highlightSugg(items); }
-            else if (e.key === 'ArrowUp') { e.preventDefault(); suggIdx = Math.max(suggIdx - 1, -1); highlightSugg(items); }
-            else if (e.key === 'Enter') { if (suggIdx >= 0 && items[suggIdx]) { inp.value = items[suggIdx].dataset.val; sbox.classList.remove('open'); filterProjects(inp.value); } suggIdx = -1; }
-            else if (e.key === 'Escape') { sbox.classList.remove('open'); suggIdx = -1; }
+            if (e.key === 'Enter') { filterProjects(inp.value); }
         });
         function showSugg(q) {
             suggIdx = -1;
@@ -2628,6 +3010,198 @@
 
         // ── TOAST ─────────────────────────────────────────────────────────────────────
         function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2600); }
+
+        // ── LANDING PAGE ──
+        function goToAuthSection() {
+            const el = document.getElementById('ls-auth');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function enterApp() {
+            const lp = document.getElementById('landingPage');
+            if (lp) lp.style.display = 'none';
+            const regName = document.getElementById('reg-name');
+            const name = (regName && regName.value.trim()) || 'Creative User';
+            const locEl = document.getElementById('reg-loc');
+            const loc = (locEl && locEl.value.trim()) || 'Remote';
+            const roleEl = document.getElementById('reg-role');
+            const role = (roleEl && roleEl.value) || 'Creative';
+            const bioEl = document.getElementById('reg-bio');
+            const bio = (bioEl && bioEl.value.trim()) || '';
+            userProfile = { name, location: loc, role: role || 'Creative', bio };
+            initApp();
+        }
+
+        // ── PROFILE / CONNECT ──
+        function showCreatorProfile(pid) {
+            const p = PROJECTS.find(x => x.id === pid);
+            if (!p) return;
+            document.getElementById('profileName').textContent = p.creator.name;
+            document.getElementById('profileMeta').textContent = p.location + ' · ' + p.tags.slice(0, 2).join(', ');
+            const tagsEl = document.getElementById('profileTags');
+            tagsEl.innerHTML = p.roles.slice(0, 3).map(r => `<span class="chip chip-role">${r}</span>`).join('');
+            const btn = document.getElementById('connectBtn');
+            if (btn) { btn.textContent = 'Connect'; btn.className = 'btn btn-primary'; btn.disabled = false; }
+            const wg = document.getElementById('workGrid');
+            if (wg) {
+                wg.innerHTML = WORK_SVGS.slice(0, 4).map((svg, i) => `
+      <div class="work-item">
+        <svg viewBox="0 0 400 300" style="height:140px">${svg}</svg>
+        <div class="work-item-label">${p.title} — Part ${i + 1}</div>
+      </div>`).join('');
+            }
+            showPage('profile');
+        }
+
+        function connectWithUser() {
+            const btn = document.getElementById('connectBtn');
+            if (btn) { btn.textContent = 'Connected \u2713'; btn.className = 'btn btn-ghost'; btn.disabled = true; }
+            showToast('Connected!');
+        }
+
+        // ── SEARCH JOB TITLE FILTER ──
+        const JOB_TITLES = ['Photographer', 'Videographer', 'Director', 'Illustrator', 'Graphic Designer', 'Animator', 'Music Producer', 'Writer', 'Art Director', '3D Artist', 'UX Designer', 'Sound Designer', 'Cinematographer', 'Typographer', 'Brand Designer'];
+        let selectedJobs = [];
+
+        function renderJobTitlePanel() {
+            const panel = document.getElementById('jobTitlePanel');
+            if (!panel) return;
+            panel.innerHTML = JOB_TITLES.map(t => `<button class="job-chip-btn${selectedJobs.includes(t) ? ' selected' : ''}" onclick="toggleJobTitle('${t}')">${t}</button>`).join('');
+        }
+
+        function toggleJobTitle(title) {
+            const idx = selectedJobs.indexOf(title);
+            if (idx >= 0) selectedJobs.splice(idx, 1);
+            else selectedJobs.push(title);
+            renderJobTitlePanel();
+            renderSearchTags();
+        }
+
+        function renderSearchTags() {
+            const wrap = document.getElementById('searchTagsWrap');
+            if (!wrap) return;
+            wrap.innerHTML = selectedJobs.map(t => `<button class="selected-job-chip" onclick="toggleJobTitle('${t}')">${t} \u2715</button>`).join('');
+        }
+
+        function filterByJobs() {
+            const grid = document.getElementById('projectGrid');
+            if (!grid) return;
+            if (selectedJobs.length === 0) {
+                grid.innerHTML = PROJECTS.map(cardHTML).join('');
+                return;
+            }
+            const filtered = PROJECTS.filter(p => p.roles.some(r => selectedJobs.some(j => r.toLowerCase().includes(j.toLowerCase()) || j.toLowerCase().includes(r.toLowerCase()))));
+            grid.innerHTML = filtered.map(cardHTML).join('');
+        }
+
+        // ── CREATE PAGE ──
+        const CREATE_TYPES = [
+            { id: 'photo', icon: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>', title: 'Photo', desc: 'Share a photo or image from your work' },
+            { id: 'video', icon: '<polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/>', title: 'Video', desc: 'Share a video or film clip' },
+            { id: 'writing', icon: '<path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>', title: 'Writing', desc: 'An article, poem, script, or any text' },
+            { id: 'project', icon: '<rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>', title: 'Project', desc: 'A multi-piece project with a team' },
+            { id: 'process', icon: '<line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>', title: 'Process', desc: 'Show your steps, sketches, and evolution' }
+        ];
+
+        function renderCreateTypes() {
+            const grid = document.getElementById('createTypesGrid');
+            const formArea = document.getElementById('createFormArea');
+            if (!grid) return;
+            if (formArea) formArea.style.display = 'none';
+            grid.style.display = '';
+            grid.innerHTML = CREATE_TYPES.map(t => `
+    <div class="create-type-card" onclick="openCreateForm('${t.id}')">
+      <div class="create-type-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${t.icon}</svg></div>
+      <div class="create-type-title">${t.title}</div>
+      <div class="create-type-desc">${t.desc}</div>
+    </div>`).join('');
+        }
+
+        function openCreateForm(type) {
+            const grid = document.getElementById('createTypesGrid');
+            const formArea = document.getElementById('createFormArea');
+            if (!formArea) return;
+            if (grid) grid.style.display = 'none';
+            formArea.style.display = '';
+            const t = CREATE_TYPES.find(x => x.id === type) || { title: type };
+            let extraFields = '';
+            if (type === 'photo') {
+                extraFields = `<div class="cp-group"><label>Image (URL or upload)</label><input type="text" id="cf-media" placeholder="Paste an image URL\u2026"/></div>`;
+            } else if (type === 'video') {
+                extraFields = `<div class="cp-group"><label>Video URL</label><input type="text" id="cf-media" placeholder="YouTube, Vimeo, or direct URL\u2026"/></div>`;
+            } else if (type === 'writing') {
+                extraFields = `<div class="cp-group"><label>Content</label><textarea id="cf-body" style="min-height:120px" placeholder="Write something\u2026"></textarea></div>`;
+            } else if (type === 'project') {
+                extraFields = `<div class="cp-group"><label>Cover Image (URL)</label><input type="text" id="cf-media" placeholder="Paste an image URL\u2026"/></div>
+    <div class="cp-group"><label>Team Roles</label><input type="text" id="cf-roles" placeholder="e.g. Director, Photographer, Editor"/></div>`;
+            } else if (type === 'process') {
+                extraFields = `<div class="cp-group"><label>Step 1</label><input type="text" class="cf-step" placeholder="Describe the first step\u2026"/></div>
+    <div class="cp-group"><label>Step 2</label><input type="text" class="cf-step" placeholder="Describe the next step\u2026"/></div>
+    <div class="cp-group"><label>Step 3</label><input type="text" class="cf-step" placeholder="Final result or takeaway\u2026"/></div>`;
+            }
+            formArea.innerHTML = `
+    <button class="back-btn" onclick="renderCreateTypes()">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Back
+    </button>
+    <div class="create-form-area">
+      <h3>${t.title}</h3>
+      <div class="cp-group"><label>Title</label><input type="text" id="cf-title" placeholder="Give it a name\u2026"/></div>
+      ${extraFields}
+      <div class="cp-group"><label>Description</label><textarea id="cf-desc" style="min-height:80px" placeholder="Tell us about this work\u2026"></textarea></div>
+      <div class="cp-group"><label>Tags</label><input type="text" id="cf-tags" placeholder="e.g. photography, portrait, colour"/></div>
+      <div class="create-preview-label">Preview in portfolio</div>
+      <div class="create-preview-card">
+        <div class="preview-img"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:52px;height:52px">${(CREATE_TYPES.find(x => x.id === type) || { icon: '' }).icon}</svg></div>
+        <div class="preview-body">
+          <div class="preview-title">Your title here</div>
+          <div class="preview-role">${t.title} \u00B7 just now</div>
+        </div>
+      </div>
+      <div class="modal-actions" style="margin-top:24px">
+        <button class="btn btn-ghost" onclick="renderCreateTypes()">Cancel</button>
+        <button class="btn btn-outline" onclick="submitPost('${type}')">Post to Portfolio</button>
+      </div>
+    </div>`;
+            const titleInput = formArea.querySelector('#cf-title');
+            if (titleInput) {
+                titleInput.addEventListener('input', function () {
+                    const pv = formArea.querySelector('.preview-title');
+                    if (pv) pv.textContent = this.value || 'Your title here';
+                });
+            }
+        }
+
+        function submitPost(type) {
+            const title = document.getElementById('cf-title');
+            const tval = (title && title.value.trim()) || 'Untitled';
+            showToast('Posted "' + tval + '" to your portfolio!');
+            renderCreateTypes();
+            showPage('profile');
+        }
+
+        // ── SEARCH JOB TITLE PANEL EVENTS ──
+        (function setupJobTitleSearch() {
+            const searchWrap = document.getElementById('searchWrap');
+            const panel = document.getElementById('jobTitlePanel');
+            const inp = document.getElementById('searchInput');
+            if (!inp || !panel) return;
+            inp.addEventListener('focus', function () {
+                panel.classList.add('open');
+                renderJobTitlePanel();
+            });
+            inp.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    filterByJobs();
+                    panel.classList.remove('open');
+                }
+            });
+            document.addEventListener('click', function (e) {
+                if (searchWrap && !searchWrap.contains(e.target)) {
+                    panel.classList.remove('open');
+                }
+            });
+        })();
     </script>
 </body>
 
