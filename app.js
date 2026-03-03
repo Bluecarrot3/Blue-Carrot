@@ -293,7 +293,8 @@ function openApplyModal(id) {
     renderModal(); document.getElementById('applyModal').classList.add('open');
 }
 function closeModal() { document.getElementById('applyModal').classList.remove('open'); }
-document.getElementById('applyModal').addEventListener('click', e => { if (e.target === document.getElementById('applyModal')) closeModal(); });
+const applyModal = document.getElementById('applyModal');
+if (applyModal) applyModal.addEventListener('click', e => { if (e.target === applyModal) closeModal(); });
 
 function renderModal() {
     const p = PROJECTS.find(x => x.id === currentApplyId); const total = 3;
@@ -531,10 +532,12 @@ function submitAddPortfolio() {
     showToast('Added to portfolio!');
 }
 const inp = document.getElementById('searchInput');
-inp.addEventListener('input', () => { filterProjects(inp.value); });
-inp.addEventListener('keydown', e => {
-    if (e.key === 'Enter') { filterProjects(inp.value); }
-});
+if (inp) {
+    inp.addEventListener('input', () => { filterProjects(inp.value); });
+    inp.addEventListener('keydown', e => {
+        if (e.key === 'Enter') { filterProjects(inp.value); }
+    });
+}
 function showSugg(q) {
     suggIdx = -1;
     const f = q.length < 1 ? SUGGESTIONS.slice(0, 7) : SUGGESTIONS.filter(s => s.toLowerCase().includes(q.toLowerCase())).slice(0, 7);
