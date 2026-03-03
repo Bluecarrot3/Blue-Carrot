@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Blue Carrot — Sign In</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="login-wrap">
+        <div class="signin-card">
+            <div class="signin-logo">
+                <!-- paste your carrot SVG here -->
+                <span class="signin-logo-text">Blue Carrot</span>
+            </div>
+            <p class="signin-sub">The creative portfolio platform</p>
+            <div class="si-tabs">
+                <div class="si-tab active" onclick="switchTab('login')">Sign In</div>
+                <div class="si-tab" onclick="switchTab('register')">Create Account</div>
+            </div>
+            <div class="si-form active" id="si-login">
+                <div class="si-group"><label>Email</label><input type="text" placeholder="you@example.com" /></div>
+                <div class="si-group"><label>Password</label><input type="password" placeholder="••••••••" /></div>
+                <button class="btn btn-outline btn-full" onclick="goToApp()">Sign In</button>
+            </div>
+            <div class="si-form" id="si-register">
+                <div class="si-group"><label>Name</label><input type="text" id="reg-name" placeholder="Ada Lovelace" />
+                </div>
+                <div class="si-group"><label>Email</label><input type="text" placeholder="you@example.com" /></div>
+                <div class="si-group"><label>City &amp; Country</label><input type="text" id="reg-loc"
+                        placeholder="Oslo, Norway" /></div>
+                <div class="si-group"><label>Primary Creative Role</label>
+                    <select id="reg-role">
+                        <option value="">— Select —</option>
+                        <option>Illustrator</option>
+                        <option>Animator</option>
+                        <option>Photographer</option>
+                        <option>Director</option>
+                        <option>Editor</option>
+                        <option>Sound Designer</option>
+                        <option>Graphic Designer</option>
+                        <option>3D Artist</option>
+                        <option>Motion Designer</option>
+                        <option>Producer</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="si-group"><label>Short Bio</label>
+                    <textarea id="reg-bio" placeholder="Tell collaborators a bit about yourself…"></textarea>
+                </div>
+                <button class="btn btn-outline btn-full" onclick="goToApp()">Create Account</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('.si-tab').forEach((t, i) => t.classList.toggle('active', (i === 0 && tab === 'login') || (i === 1 && tab === 'register')));
+            document.getElementById('si-login').classList.toggle('active', tab === 'login');
+            document.getElementById('si-register').classList.toggle('active', tab === 'register');
+        }
+        function goToApp() {
+            const name = document.getElementById('reg-name')?.value.trim() || 'Creative User';
+            const loc = document.getElementById('reg-loc')?.value.trim() || 'Remote';
+            const role = document.getElementById('reg-role')?.value || 'Creative';
+            const bio = document.getElementById('reg-bio')?.value.trim() || '';
+            sessionStorage.setItem('user', JSON.stringify({ name, location: loc, role, bio }));
+            window.location.href = 'home.html';
+        }
+    </script>
+</body>
+
+</html>

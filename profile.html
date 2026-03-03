@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Blue Carrot — Profile</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <nav>
+        <a class="nav-logo" href="home.html"><span class="nav-logo-text">Blue Carrot</span></a>
+        <div class="nav-actions">
+            <a href="home.html" class="nav-icon-btn" title="Home">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                    <polyline points="9 22 9 12 15 12 15 22" />
+                </svg>
+            </a>
+            <a href="messages.html" class="nav-icon-btn" title="Messages">
+                <svg viewBox="0 0 24 24">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>
+            </a>
+            <a href="create.html" class="nav-icon-btn" title="Create">
+                <svg viewBox="0 0 24 24">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+            </a>
+            <a href="profile.html" class="nav-icon-btn active" title="Profile">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+            </a>
+        </div>
+    </nav>
+    <div class="app-body">
+        <div id="mainCol">
+            <div class="page">
+                <div class="profile-hero">
+                    <div class="profile-avatar-lg" id="profileInitialsEl" style="font-size:2rem">?</div>
+                    <div class="profile-info">
+                        <h2 id="profileName">—</h2>
+                        <p class="meta" id="profileMeta">—</p>
+                        <div class="profile-tags" id="profileTags"></div>
+                        <button class="btn btn-outline" onclick="showToast('Connected!')"
+                            style="margin-top:14px">Connect</button>
+                    </div>
+                </div>
+
+                <div class="profile-tabs">
+                    <button class="profile-tab active" id="tabPortfolio"
+                        onclick="switchProfileTab('portfolio')">Portfolio</button>
+                    <button class="profile-tab" id="tabProjects"
+                        onclick="switchProfileTab('projects')">Projects</button>
+                </div>
+
+                <div id="portfolioView">
+                    <div class="work-grid" id="workGrid"></div>
+                    <button class="add-portfolio-btn"
+                        onclick="document.getElementById('addPortfolioModal').classList.add('open')">+</button>
+                </div>
+                <div id="projectsView" style="display:none">
+                    <div id="acceptedProjectsList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Portfolio Modal -->
+    <div class="modal-overlay" id="addPortfolioModal">
+        <div class="modal" style="max-width:400px">
+            <button class="modal-close" onclick="document.getElementById('addPortfolioModal').classList.remove('open')">
+                <svg viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+            <h2>Add to Portfolio</h2>
+            <p class="sub">Add a project you have worked on.</p>
+            <div class="cp-group"><label>Project Title</label><input type="text" id="ap-title"
+                    placeholder="e.g. Brand Identity — Studio X" /></div>
+            <div class="cp-group"><label>Your Role</label><input type="text" id="ap-role"
+                    placeholder="e.g. Illustrator" /></div>
+            <div class="modal-actions">
+                <button class="btn btn-ghost"
+                    onclick="document.getElementById('addPortfolioModal').classList.remove('open')">Cancel</button>
+                <button class="btn btn-primary" onclick="submitAddPortfolio()">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast"></div>
+    <script src="app.js"></script>
+    <script>
+        // Load user from session
+        const user = JSON.parse(sessionStorage.getItem('user') || '{"name":"Creative User","location":"Remote","role":"Creative","bio":""}');
+        const initials = user.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+        document.getElementById('profileInitialsEl').textContent = initials;
+        document.getElementById('profileName').textContent = user.name;
+        document.getElementById('profileMeta').textContent = `${user.role} · ${user.location}`;
+        document.getElementById('profileTags').innerHTML = `<span class="chip chip-role">${user.role}</span>${user.bio ? '<span class="chip chip-tag">Open to Collabs</span>' : ''}`;
+
+        // Render work grid with sample SVGs
+        let myPortfolioItems = [];
+        function renderWorkGrid() {
+            document.getElementById('workGrid').innerHTML =
+                WORK_LABELS.map((label, i) => `<div class="work-item">${WORK_SVGS[i]}<div class="work-item-label">${label}</div></div>`).join('') +
+                myPortfolioItems.map(item => `<div class="work-item">${PROJECT_SVGS[item.svgIdx % PROJECT_SVGS.length]}<div class="work-item-label">${item.title}${item.role ? ' · ' + item.role : ''}</div></div>`).join('');
+        }
+        renderWorkGrid();
+
+        function switchProfileTab(tab) {
+            const isPortfolio = tab === 'portfolio';
+            document.getElementById('portfolioView').style.display = isPortfolio ? '' : 'none';
+            document.getElementById('projectsView').style.display = isPortfolio ? 'none' : '';
+            document.getElementById('tabPortfolio').classList.toggle('active', isPortfolio);
+            document.getElementById('tabProjects').classList.toggle('active', !isPortfolio);
+        }
+        function submitAddPortfolio() {
+            const title = document.getElementById('ap-title').value.trim();
+            if (!title) { showToast('Please enter a title.'); return; }
+            const role = document.getElementById('ap-role').value.trim();
+            myPortfolioItems.push({ title, role, svgIdx: myPortfolioItems.length });
+            document.getElementById('addPortfolioModal').classList.remove('open');
+            renderWorkGrid();
+            showToast('Added to portfolio!');
+        }
+    </script>
+</body>
+
+</html>
