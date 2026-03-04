@@ -1808,8 +1808,14 @@
             pointer-events: auto;
         }
 
+        .ls-cta {
+            position: relative;
+            z-index: 2000;
+        }
+
         .ls-cta .btn {
-            z-index: 1001;
+            position: relative;
+            z-index: 2001;
         }
 
         #landingNav {
@@ -3558,6 +3564,23 @@
                 }
             });
         })();
+    </script>
+    <script>
+        // Fallback: ensure landing CTAs call the expected functions even if inline handlers fail
+        window.addEventListener('DOMContentLoaded', function () {
+            try {
+                document.querySelectorAll('.ls-cta .btn, .landing-auth-btns .btn').forEach(btn => {
+                    // If inline onclick exists, keep it. Otherwise attempt to bind by role.
+                    if (!btn.onclick) {
+                        const txt = (btn.textContent || '').trim().toLowerCase();
+                        if (txt.includes('get started') || txt.includes('sign up')) btn.addEventListener('click', () => { if (typeof enterApp === 'function') enterApp(); });
+                        if (txt.includes('log in') || txt.includes('sign in')) btn.addEventListener('click', () => { if (typeof goToAuthSection === 'function') goToAuthSection(); });
+                    }
+                });
+            } catch (e) {
+                console.error('CTA fallback binding failed', e);
+            }
+        });
     </script>
 </body>
 
