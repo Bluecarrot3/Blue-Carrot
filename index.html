@@ -1801,6 +1801,17 @@
             flex-direction: column
         }
 
+        /* Ensure landing page buttons receive pointer events (fix for inactive CTA) */
+        #landingPage,
+        #landingPage .ls,
+        #landingPage .ls-cta .btn {
+            pointer-events: auto;
+        }
+
+        .ls-cta .btn {
+            z-index: 1001;
+        }
+
         #landingNav {
             height: 64px;
             display: flex;
