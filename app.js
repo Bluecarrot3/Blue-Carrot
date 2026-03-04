@@ -62,10 +62,14 @@ const WORK_SVGS = [
 // ── DATA ─────────────────────────────────────────────────────────────────────
 const PROJECTS = [
     {
-        id: 1, title: "Echoes of Dust", summary: "A silent short film about memory and migration, shot in the Swedish highlands on 16mm.",
-        description: "Echoes of Dust is a 15-minute silent narrative short exploring themes of memory, displacement, and identity. Set against the sparse highland landscapes of central Sweden, the film will be shot over three weekends in May using a rented Bolex 16mm camera.\n\nTimeline: Pre-production runs through April (script lock, casting, location scouting). Principal photography takes place May 9–25. Post-production and editing are scheduled for June–July, with a festival submission deadline of August 1 for Göteborg Film Festival.\n\nThe project is fully self-funded with a modest budget of 40,000 SEK. All collaborators will receive a full credit, a DCP copy of the film, and a 10% share of any festival prize money.",
-        roles: ["Director of Photography", "Sound Designer", "Editor", "Production Designer"],
-        tags: ["Short Film", "Drama", "16mm"], creator: { name: "Mara Voss", initials: "MV" }, location: "Stockholm, Sweden", date: "2025-03-10", svgIdx: 0
+        id: 1, title: "Echoes of Dust", summary: "An atmospheric indie adventure game set in a vast, post-apocalyptic desert world where players uncover lost memories buried in the ruins of civilization.",
+        description: "Echoes of Dust is a first-person atmospheric adventure game set in a desolate desert world, years after a mysterious collapse of civilization. Players explore abandoned settlements and uncover fragmented memories, piecing together the story of what was lost and why.
+
+Timeline: The project is in active development with a playable vertical slice demo targeted for Q3 2025. Steam Early Access is planned for Q1 2026, with full release targeting end of 2026. We are currently seeking a narrative designer and a composer to join the core team.
+
+This is a revenue-share project. All core contributors receive a percentage of net sales proportional to their contribution, alongside full credit in the shipped game.",
+        roles: ["Narrative Designer", "Composer", "3D Environment Artist", "UI/UX Designer"],
+        tags: ["Indie Game", "Adventure", "Unreal Engine"], creator: { name: "Robert John", initials: "RJ" }, location: "Stockholm, Sweden", date: "2025-03-10", svgIdx: null, customSvg: '<img src="bc gif 3.gif" style="width:100%;height:100%;object-fit:cover;display:block">'
     },
     {
         id: 2, title: "Neon Fables", summary: "Animated music video series blending synthwave and 2D cel animation. 5 episodes planned.",
@@ -164,7 +168,7 @@ const MESSAGES_DATA = [
 ];
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
-let appliedIds = new Set();
+let appliedIds = new Set([2, 7]);
 let activeMsg = 0;
 let currentApplyId = null;
 let applyStep = 0;
@@ -580,6 +584,11 @@ function enterApp() {
 
 // ── PROFILE / CONNECT ──
 function showCreatorProfile(pid) {
+    // Multi-page setup: navigate to profile.html?pid=X if no SPA page-profile exists
+    if (!document.getElementById('page-profile')) {
+        window.location.href = 'profile.html?pid=' + pid;
+        return;
+    }
     const p = PROJECTS.find(x => x.id === pid);
     if (!p) return;
     document.getElementById('profileName').textContent = p.creator.name;
