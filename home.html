@@ -96,7 +96,7 @@
         }
         function openProject(id) {
             const p = PROJECTS.find(x => x.id === id); if (!p) return;
-            const svg = PROJECT_SVGS[p.svgIdx % PROJECT_SVGS.length];
+            const svg = p.svgIdx != null ? PROJECT_SVGS[p.svgIdx % PROJECT_SVGS.length] : (p.customSvg || PROJECT_SVGS[0]);
             const tags = p.tags.map(t => `<span class="chip chip-role">${t}</span>`).join('');
             document.getElementById('detailContent').innerHTML = `
         <div class="detail-cover">${svg}</div>
@@ -109,7 +109,7 @@
         <div class="detail-section"><h3>About this Project</h3><p class="detail-desc">${p.description.split('\n\n')[0]}</p></div>
         <div class="detail-section"><h3>Creator</h3><p>${p.creator.name}</p></div>
         <div style="margin-top:24px;display:flex;gap:12px">
-          <a href="profile.html" class="btn btn-outline">View Profile</a>
+          <a href="profile.html?pid=${id}" class="btn btn-outline">View Profile</a>
           <button class="btn btn-primary" onclick="openApplyModal(${p.id})">Apply to Collaborate</button>
         </div>`;
             document.getElementById('page-home').style.display = 'none';
