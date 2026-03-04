@@ -2823,10 +2823,10 @@
                 tags: ["Photography"], creator: { name: "Cleo Nkosi", initials: "CN" }, location: "Malmö, Sweden", date: "2025-01-30", svgIdx: 3
             },
             {
-                id: 7, title: "Glitch Garden", summary: "A puzzle game where you grow and wire living plants to solve generative circuits. Each species behaves differently — patience is the only mechanic that matters.",
-                description: "Glitch Garden came from a question about biosensors and game design: what if the input device was alive? You grow plants, connect them to circuits, and their electrical signals drive the puzzle state. Different species — slow-growing cacti, fast-spiking sensitive plants — produce wildly different signal patterns.\n\nThe visual language leans into generative glitch art. The circuits look organic; the plants look electric. The game rewards the kind of attention you usually only bring to living things.\n\nBuilt in Godot. A demo covering the first three biomes is playable. Currently seeking a composer whose music can evolve alongside the player's garden.",
-                roles: ["Creative Coder", "Electronics / Arduino", "Sound Designer", "3D Artist"],
-                tags: ["Installation Art", "Interactive"], creator: { name: "Sam Wu", initials: "SW" }, location: "Aarhus, Denmark", date: "2025-02-05", svgIdx: null, customSvg: '<img src="bc gif 1.gif" style="width:100%;height:100%;object-fit:cover;display:block">'
+                id: 5, title: "Hollow Kingdom", summary: "A 2D roguelite indie game set in a crumbling underground empire. Unity-based, solo dev.",
+                description: "Hollow Kingdom is a 2D roguelite with deep lore, pixel art aesthetics, and tight combat — part Dark Souls, part Spelunky, with narrative ambition closer to Disco Elysium. Built in Unity over 8 months of solo development.\n\nTimeline: A vertical slice demo is due by August 2025 for submission to the Nordic Game indie pitch. Steam Early Access targets Q2 2026. We need art, music, and narrative contributors onboarded within 4 weeks to meet the demo deadline.\n\nEquity-share project. All core collaborators receive a percentage of net revenue proportional to contribution.",
+                roles: ["Pixel Artist", "Unity Dev", "3D Artist", "Game Designer", "Sound Designer"],
+                tags: ["Indie Game", "Roguelite", "Pixel Art"], creator: { name: "Finn Adler", initials: "FA" }, location: "Oslo, Norway", date: "2025-04-15", svgIdx: 4
             },
             {
                 id: 6, title: "Muscle Memory", summary: "A rhythm and timing game about competitive powerlifting. Learn the lifts, manage fatigue, and step onto the platform when you're ready.",
@@ -2835,12 +2835,11 @@
                 tags: ["Documentary", "Short Film"], creator: { name: "Iris Fontaine", initials: "IF" }, location: "Gothenburg, Sweden", date: "2025-03-28", svgIdx: null, customSvg: '<img src="bc gif 12.gif" style="width:100%;height:100%;object-fit:cover;display:block">'
             },
             {
-                id: 5, title: "Silent Crowd", summary: "A 2D roguelite set in a crumbling underground empire. Pixel art, punishing combat, and a world built on whispered histories.",
-                description: "Silent Crowd started as a personal project to understand roguelite design from the inside. The genre had always felt either too mechanical or too story-thin; the goal was to find the space where both could coexist without compromising each other.\n\nThe underground empire setting came first — the idea of a civilisation that built downward, away from something. The pixel art style was chosen for its capacity for suggestion: small sprites read differently in each player's imagination.\n\nBuilt in Unity over 8 months. A vertical slice demo is complete and submitted to the Nordic Game indie pitch. Looking for a composer and narrative designer for Steam Early Access in Q2 2026.",
-                roles: ["Pixel Artist", "Unity Dev", "3D Artist", "Game Designer", "Sound Designer"],
-                tags: ["Roguelite", "Pixel Art"], creator: { name: "Finn Adler", initials: "FA" }, location: "Oslo, Norway", date: "2025-04-15", svgIdx: 4
+                id: 7, title: "Glitch Garden", summary: "An interactive art installation using generative code and live plant biometric sensors.",
+                description: "Glitch Garden is a mixed-media installation where live plant biometric data drives generative visuals in p5.js. Visitors interact with the plants to shift the visual and audio environment in real time.\n\nTimeline: The installation premieres at Kunsthal Aarhus on July 18 as part of a group exhibition on ecology and technology. Build week starts July 7. Post-exhibition tour to Oslo and Helsinki planned.\n\nAll collaborators are listed as co-artists in the exhibition catalogue and share future commissions.",
+                roles: ["Creative Coder", "Electronics / Arduino", "Sound Designer", "3D Artist"],
+                tags: ["Installation Art", "Interactive"], creator: { name: "Sam Wu", initials: "SW" }, location: "Aarhus, Denmark", date: "2025-02-05", svgIdx: null, customSvg: '<img src="bc gif 1.gif" style="width:100%;height:100%;object-fit:cover;display:block">'
             },
-            {
                 id: 8, title: "The Fold", summary: "A spatial puzzle game about folding paper into three-dimensional shapes. Each level is a crumpled map of somewhere that no longer exists.",
                 description: "The Fold is a puzzle game built around a single mechanic: folding. Each level presents a flat, distorted piece of paper that must be folded — in the right sequence, along the right creases — into a precise 3D shape. The difficulty is in reading the geometry, not in reflexes.\n\nThe concept started with origami and grew into something closer to cartography. When you complete a shape correctly, it reveals a fragment of a map. Where the map leads is the game's only story, and it is told entirely through the shapes themselves.\n\nBuilt in Unity with custom fold-simulation physics. A 30-level demo is complete. Looking for a narrative designer and a composer whose work can sit under long stretches of silence.",
                 roles: ["Photographer", "Makeup Artist", "Stylist", "Retoucher"],
@@ -3367,7 +3366,7 @@
             if (id === 2) {
                 coverHTML = '<div class="detail-cover"><img src="user_photo_4.jpg" style="width:100%;object-fit:cover;display:block" alt="Neon Fables"></div>';
             } else if (id === 7) {
-                coverHTML = '<div class="detail-cover"><img src="bc gif 1.gif" style="width:100%;object-fit:cover;display:block" alt="Glitch Garden"></div>';
+                coverHTML = '<div class="detail-cover"><img src="bc gif 1.gif" style="width:100%;object-fit:cover;display:block" alt="Glitch Garden"></div>'
             } else {
                 const svg = p.svgIdx != null ? PROJECT_SVGS[p.svgIdx % 5] : (p.customSvg || PROJECT_SVGS[0]);
                 coverHTML = `<div class="detail-cover">${svg}</div>`;
