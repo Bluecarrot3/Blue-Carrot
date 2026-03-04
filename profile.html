@@ -13,10 +13,7 @@
         <a class="nav-logo" href="home.html"><span class="nav-logo-text">Blue Carrot</span></a>
         <div class="nav-actions">
             <a href="home.html" class="nav-icon-btn" title="Home">
-                <svg viewBox="0 0 24 24">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                    <polyline points="9 22 9 12 15 12 15 22" />
-                </svg>
+                <img src="dddd (1).svg" style="width:24px;height:24px;object-fit:contain;display:block" alt="Home" />
             </a>
             <a href="messages.html" class="nav-icon-btn" title="Messages">
                 <svg viewBox="0 0 24 24">
@@ -51,20 +48,78 @@
                     </div>
                 </div>
 
-                <div class="profile-tabs">
-                    <button class="profile-tab active" id="tabPortfolio"
+                <div class="profile-tabs" id="profile-tabs-section">
+                    <button class="profile-tab" id="tabPortfolio"
                         onclick="switchProfileTab('portfolio')">Portfolio</button>
-                    <button class="profile-tab" id="tabProjects"
+                    <button class="profile-tab active" id="tabProjects"
                         onclick="switchProfileTab('projects')">Projects</button>
                 </div>
 
-                <div id="portfolioView">
+                <div id="portfolioView" style="display:none">
                     <div class="work-grid" id="workGrid"></div>
-                    <button class="add-portfolio-btn"
-                        onclick="document.getElementById('addPortfolioModal').classList.add('open')">+</button>
                 </div>
-                <div id="projectsView" style="display:none">
-                    <div id="acceptedProjectsList"></div>
+                <div id="projectsView">
+                    <div class="grid" id="projectsGrid">
+
+                        <!-- Neon Fables card -->
+                        <div class="card" tabindex="0" role="article" aria-label="Neon Fables"
+                            onclick="openProfileProject(2)" style="cursor:pointer">
+                            <div class="card-img-wrap">
+                                <img src="user_photo_4.jpg" style="width:100%;height:100%;object-fit:cover;display:block" alt="Neon Fables">
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title">Neon Fables</div>
+                                <div class="card-desc">Animated music video series blending synthwave and 2D cel animation. 5 episodes planned.</div>
+                                <div class="chips">
+                                    <span class="chip chip-role">Animation</span>
+                                    <span class="chip chip-role">Music Video</span>
+                                    <span class="chip chip-role">Synthwave</span>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-primary" onclick="event.stopPropagation();openProfileProject(2)">View Project</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Glitch Garden card -->
+                        <div class="card" tabindex="0" role="article" aria-label="Glitch Garden"
+                            onclick="openProfileProject(7)" style="cursor:pointer">
+                            <div class="card-img-wrap">
+                                <img src="bc gif 1.gif" style="width:100%;height:100%;object-fit:cover;display:block" alt="Glitch Garden">
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title">Glitch Garden</div>
+                                <div class="card-desc">An interactive art installation using generative code and live plant biometric sensors.</div>
+                                <div class="chips">
+                                    <span class="chip chip-role">Installation Art</span>
+                                    <span class="chip chip-role">Generative</span>
+                                    <span class="chip chip-role">Interactive</span>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-primary" onclick="event.stopPropagation();openProfileProject(7)">View Project</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Add project card -->
+                        <div class="card" tabindex="0" role="button" aria-label="Add project"
+                            onclick="window.location.href='create.html'"
+                            style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:260px;cursor:pointer;border:2px dashed rgba(255,255,255,0.15)">
+                            <div style="font-size:3.5rem;line-height:1;opacity:0.4">+</div>
+                            <div style="margin-top:14px;font-size:.95rem;opacity:0.4;font-weight:600">Add Project</div>
+                        </div>
+
+                    </div>
+
+                    <!-- Project detail view (shown when a project card is clicked) -->
+                    <div id="profileDetail" style="display:none">
+                        <a class="back-btn" onclick="showProfileProjects()" style="cursor:pointer">
+                            <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round">
+                                <polyline points="15 18 9 12 15 6" />
+                            </svg> Back
+                        </a>
+                        <div id="profileDetailContent"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -93,18 +148,74 @@
         </div>
     </div>
 
+    <!-- Add Project Modal (kept but no longer triggered by + card) -->
+    <div class="modal-overlay" id="addProjectModal">
+        <div class="modal" style="max-width:400px">
+            <button class="modal-close" onclick="document.getElementById('addProjectModal').classList.remove('open')">
+                <svg viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+            <h2>Post a Project</h2>
+            <p class="sub">Share a project you are working on.</p>
+            <div class="cp-group"><label>Project Title</label><input type="text" id="proj-title"
+                    placeholder="e.g. Neon Fables Season 2" /></div>
+            <div class="cp-group"><label>Your Role</label><input type="text" id="proj-role"
+                    placeholder="e.g. Director" /></div>
+            <div class="modal-actions">
+                <button class="btn btn-ghost"
+                    onclick="document.getElementById('addProjectModal').classList.remove('open')">Cancel</button>
+                <button class="btn btn-primary" onclick="submitAddProject()">Post</button>
+            </div>
+        </div>
+    </div>
+
     <div id="toast"></div>
     <script src="app.js"></script>
     <script>
-        // Load user from session
-        const user = JSON.parse(sessionStorage.getItem('user') || '{"name":"Creative User","location":"Remote","role":"Creative","bio":""}');
-        const initials = user.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
-        document.getElementById('profileInitialsEl').textContent = initials;
-        document.getElementById('profileName').textContent = user.name;
-        document.getElementById('profileMeta').textContent = `${user.role} · ${user.location}`;
-        document.getElementById('profileTags').innerHTML = `<span class="chip chip-role">${user.role}</span>${user.bio ? '<span class="chip chip-tag">Open to Collabs</span>' : ''}`;
+        // ── CREATOR PROFILE MODE (when navigated from home via ?pid=X) ──
+        const urlParams = new URLSearchParams(window.location.search);
+        const creatorPid = parseInt(urlParams.get('pid'));
 
-        // Render work grid with sample SVGs
+        if (creatorPid) {
+            // Creator mode: show only the project that led here
+            const cp = PROJECTS.find(x => x.id === creatorPid);
+            if (cp) {
+                const ini = cp.creator.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+                document.getElementById('profileInitialsEl').textContent = ini;
+                document.getElementById('profileName').textContent = cp.creator.name;
+                document.getElementById('profileMeta').textContent = cp.location + ' · ' + cp.tags.slice(0, 2).join(', ');
+                document.getElementById('profileTags').innerHTML = cp.roles.slice(0, 3).map(r => `<span class="chip chip-role">${r}</span>`).join('');
+                // Hide tabs in creator mode
+                document.getElementById('profile-tabs-section').style.display = 'none';
+                // Replace projectsGrid with only this creator's project
+                const svg = cp.svgIdx != null ? PROJECT_SVGS[cp.svgIdx % 5] : (cp.customSvg || PROJECT_SVGS[0]);
+                document.getElementById('projectsGrid').innerHTML = `
+                    <div class="card" onclick="openProfileProject(${cp.id})" tabindex="0" role="article" style="cursor:pointer">
+                        <div class="card-img-wrap">${svg}</div>
+                        <div class="card-body">
+                            <div class="card-title">${cp.title}</div>
+                            <div class="card-desc">${cp.summary}</div>
+                            <div class="chips">${cp.tags.slice(0, 3).map(t => `<span class="chip chip-role">${t}</span>`).join('')}</div>
+                            <div class="card-footer">
+                                <div class="creator">${cp.creator.name}</div>
+                                <button class="btn btn-primary" onclick="event.stopPropagation();openProfileProject(${cp.id})">View Project</button>
+                            </div>
+                        </div>
+                    </div>`;
+            }
+        } else {
+            // ── OWN PROFILE MODE ──
+            const user = JSON.parse(sessionStorage.getItem('user') || '{"name":"Creative User","location":"Remote","role":"Creative","bio":""}');
+            const initials = user.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+            document.getElementById('profileInitialsEl').textContent = initials;
+            document.getElementById('profileName').textContent = user.name;
+            document.getElementById('profileMeta').textContent = `${user.role} · ${user.location}`;
+            document.getElementById('profileTags').innerHTML = `<span class="chip chip-role">${user.role}</span>${user.bio ? '<span class="chip chip-tag">Open to Collabs</span>' : ''}`;
+        }
+
+        // Render work grid with sample SVGs (own profile only)
         let myPortfolioItems = [];
         function renderWorkGrid() {
             document.getElementById('workGrid').innerHTML =
@@ -120,6 +231,7 @@
             document.getElementById('tabPortfolio').classList.toggle('active', isPortfolio);
             document.getElementById('tabProjects').classList.toggle('active', !isPortfolio);
         }
+
         function submitAddPortfolio() {
             const title = document.getElementById('ap-title').value.trim();
             if (!title) { showToast('Please enter a title.'); return; }
@@ -128,6 +240,62 @@
             document.getElementById('addPortfolioModal').classList.remove('open');
             renderWorkGrid();
             showToast('Added to portfolio!');
+        }
+
+        function submitAddProject() {
+            const title = document.getElementById('proj-title').value.trim();
+            if (!title) { showToast('Please enter a title.'); return; }
+            document.getElementById('addProjectModal').classList.remove('open');
+            document.getElementById('proj-title').value = '';
+            document.getElementById('proj-role').value = '';
+            showToast('Project posted!');
+        }
+
+        // ── PROJECT DETAIL VIEW (from profile page) ──
+        function openProfileProject(id) {
+            const p = PROJECTS.find(x => x.id === id);
+            if (!p) return;
+            let coverHTML;
+            if (id === 2) {
+                coverHTML = '<img src="user_photo_4.jpg" style="width:100%;object-fit:cover;display:block;max-height:360px;border-radius:12px">';
+            } else if (id === 7) {
+                coverHTML = '<img src="bc gif 1.gif" style="width:100%;object-fit:cover;display:block;max-height:360px;border-radius:12px">';
+            } else {
+                const svg = p.svgIdx != null ? PROJECT_SVGS[p.svgIdx % 5] : (p.customSvg || PROJECT_SVGS[0]);
+                coverHTML = `<div class="detail-cover">${svg}</div>`;
+            }
+            const tags = p.tags.map(t => `<span class="chip chip-role">${t}</span>`).join('');
+            document.getElementById('profileDetailContent').innerHTML = `
+                ${coverHTML}
+                <h1 class="detail-title" style="margin-top:20px">${p.title}</h1>
+                <div class="detail-meta" style="margin:10px 0 16px">
+                    <span class="detail-meta-item">
+                        <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:middle;margin-right:4px">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>${p.location}
+                    </span>
+                    <span class="detail-meta-item">
+                        <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:middle;margin-right:4px">
+                            <rect x="3" y="4" width="18" height="18" rx="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>${p.date}
+                    </span>
+                    ${tags}
+                </div>
+                <div class="detail-section"><h3>About this Project</h3><p class="detail-desc">${p.description.split('\n\n')[0]}</p></div>
+                <div class="detail-section"><h3>Creator</h3><p>${p.creator.name}</p></div>
+            `;
+            document.getElementById('projectsGrid').style.display = 'none';
+            document.getElementById('profileDetail').style.display = '';
+            window.scrollTo(0, 0);
+        }
+
+        function showProfileProjects() {
+            document.getElementById('profileDetail').style.display = 'none';
+            document.getElementById('projectsGrid').style.display = '';
         }
     </script>
 </body>
