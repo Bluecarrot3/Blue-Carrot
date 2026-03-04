@@ -62,76 +62,80 @@ const WORK_SVGS = [
 // ── DATA ─────────────────────────────────────────────────────────────────────
 const PROJECTS = [
     {
-        id: 1, title: "Echoes of Dust", summary: "A silent short film about memory and migration, shot in the Swedish highlands on 16mm.",
-        description: "Echoes of Dust is a 15-minute silent narrative short exploring themes of memory, displacement, and identity. Set against the sparse highland landscapes of central Sweden, the film will be shot over three weekends in May using a rented Bolex 16mm camera.\n\nTimeline: Pre-production runs through April (script lock, casting, location scouting). Principal photography takes place May 9–25. Post-production and editing are scheduled for June–July, with a festival submission deadline of August 1 for Göteborg Film Festival.\n\nThe project is fully self-funded with a modest budget of 40,000 SEK. All collaborators will receive a full credit, a DCP copy of the film, and a 10% share of any festival prize money.",
-        roles: ["Director of Photography", "Sound Designer", "Editor", "Production Designer"],
-        tags: ["Short Film", "Drama", "16mm"], creator: { name: "Mara Voss", initials: "MV" }, location: "Stockholm, Sweden", date: "2025-03-10", svgIdx: 0
+        id: 1, title: "Echoes of Dust", summary: "An atmospheric indie adventure game set in a vast, post-apocalyptic desert world where players uncover lost memories buried in the ruins of civilization.",
+        description: "Echoes of Dust is a first-person atmospheric adventure game set in a desolate desert world, years after a mysterious collapse of civilization. Players explore abandoned settlements and uncover fragmented memories, piecing together the story of what was lost and why.
+
+Timeline: The project is in active development with a playable vertical slice demo targeted for Q3 2025. Steam Early Access is planned for Q1 2026, with full release targeting end of 2026. We are currently seeking a narrative designer and a composer to join the core team.
+
+This is a revenue-share project. All core contributors receive a percentage of net sales proportional to their contribution, alongside full credit in the shipped game.",
+        roles: ["Narrative Designer", "Composer", "3D Environment Artist", "UI/UX Designer"],
+        tags: ["Indie Game", "Adventure", "Unreal Engine"], creator: { name: "Robert John", initials: "RJ" }, location: "Stockholm, Sweden", date: "2025-03-10", svgIdx: null, customSvg: '<img src="bc gif 3.gif" style="width:100%;height:100%;object-fit:cover;display:block">'
     },
     {
         id: 2, title: "Neon Fables", summary: "Animated music video series blending synthwave and 2D cel animation. 5 episodes planned.",
         description: "Neon Fables is a passion project combining 80s-inspired synthwave music with hand-drawn cel animation. Each episode is a 3–4 minute self-contained fable with a modern twist.\n\nTimeline: Episode 1 is already in animatic stage and is targeted for completion by end of June. Episodes 2–5 will follow on a rolling 6-week cycle through February 2026. We have three tracks already composed.\n\nThis is a revenue-share project: all earnings from YouTube, Bandcamp, and licensing will be split equally among core contributors.",
         roles: ["Animator", "Character Designer", "Compositor", "Background Artist"],
-        tags: ["Animation", "Music Video", "Synthwave"], creator: { name: "Dev Patel", initials: "DP" }, location: "Copenhagen, Denmark", date: "2025-04-02", svgIdx: 1
+        tags: ["Animation", "Music Video", "Synthwave"], creator: { name: "Dev Patel", initials: "DP" }, location: "Copenhagen, Denmark", date: "2025-04-02", svgIdx: null, customSvg: '<img src="bc gif 7.gif" style="width:100%;height:100%;object-fit:cover;display:block">'
     },
     {
         id: 3, title: "Frequency", summary: "Original soundtrack for an unreleased indie horror game. Atmospheric, generative, eerie.",
         description: "Frequency is the companion soundtrack to Hollow Drift, an upcoming indie horror-exploration game set for Steam release in Q1 2026. The soundtrack is central to the game's identity — sparse, generative, and deeply unnerving.\n\nTimeline: We need an 18-track album delivered in stems by October 2025. Composition begins immediately at a pace of 2–3 tracks per month, with a full review session at the halfway mark.\n\nAll tracks will be released on Bandcamp and Spotify ahead of the game launch. A baseline fee plus royalty share structure is available.",
         roles: ["Sound Designer", "Composer", "Audio Engineer"],
-        tags: ["Music", "Indie Game", "Ambient"], creator: { name: "Sadie Lim", initials: "SL" }, location: "Helsinki, Finland", date: "2025-02-18", svgIdx: 2
+        tags: ["Music", "Indie Game", "Ambient"], creator: { name: "Sadie Lim", initials: "SL" }, location: "Helsinki, Finland", date: "2025-02-18", svgIdx: null, customSvg: '<img src="bc gif 13.gif" style="width:100%;height:100%;object-fit:cover;display:block">'
     },
     {
         id: 4, title: "Verdigris", summary: "A photo zine exploring urban decay and green overgrowth in post-industrial Nordic cities. 32 pages.",
         description: "Verdigris documents the quiet reclamation of post-industrial urban spaces by plant life across Tallinn, Riga, and Malmö.\n\nTimeline: Shooting trips are planned for May (Tallinn & Riga) and June (Malmö). Layout complete by mid-July for a print deadline of August. The zine launches at Stockholm Zine Fair in September — 500 copies.\n\nAll contributors receive 30 copies of the zine, a full credit, and a proportional share of sales revenue after print costs.",
         roles: ["Photographer", "Stylist", "Layout Designer", "Retoucher"],
-        tags: ["Photography", "Zine", "Print"], creator: { name: "Cleo Nkosi", initials: "CN" }, location: "Malmö, Sweden", date: "2025-01-30", svgIdx: 3
+        tags: ["Photography", "Zine", "Print"], creator: { name: "Cleo Nkosi", initials: "CN" }, location: "Malmö, Sweden", date: "2025-01-30", svgIdx: null, customSvg: '<img src="bc gif 8.gif" style="width:100%;height:100%;object-fit:cover;display:block">'
     },
     {
         id: 5, title: "Hollow Kingdom", summary: "A 2D roguelite indie game set in a crumbling underground empire. Unity-based, solo dev.",
         description: "Hollow Kingdom is a 2D roguelite with deep lore, pixel art aesthetics, and tight combat — part Dark Souls, part Spelunky, with narrative ambition closer to Disco Elysium. Built in Unity over 8 months of solo development.\n\nTimeline: A vertical slice demo is due by August 2025 for submission to the Nordic Game indie pitch. Steam Early Access targets Q2 2026. We need art, music, and narrative contributors onboarded within 4 weeks to meet the demo deadline.\n\nEquity-share project. All core collaborators receive a percentage of net revenue proportional to contribution.",
         roles: ["Pixel Artist", "Unity Dev", "3D Artist", "Game Designer", "Sound Designer"],
-        tags: ["Indie Game", "Roguelite", "Pixel Art"], creator: { name: "Finn Adler", initials: "FA" }, location: "Oslo, Norway", date: "2025-04-15", svgIdx: 4
+        tags: ["Indie Game", "Roguelite", "Pixel Art"], creator: { name: "Finn Adler", initials: "FA" }, location: "Oslo, Norway", date: "2025-04-15", svgIdx: null, customSvg: '<img src="bc gif 4.jpeg" style="width:100%;height:100%;object-fit:cover;display:block">'
     },
     {
         id: 6, title: "Muscle Memory", summary: "A documentary short following three amateur weightlifters ahead of their first competition.",
         description: "Muscle Memory is a 20-minute observational documentary following three first-time competitors at a regional powerlifting meet in Gothenburg over six weeks of training.\n\nTimeline: Filming begins the first week of May and wraps at the competition on June 14. Edit begins June 20 with picture lock July 31. Submitting to CPH:DOX, Tempo, and Sheffield DocFest.\n\nContributors receive a deferred fee payable upon any distribution deal, plus a full festival credit.",
         roles: ["Cinematographer", "Colorist", "Composer", "Editor"],
-        tags: ["Documentary", "Short Film", "Sports"], creator: { name: "Iris Fontaine", initials: "IF" }, location: "Gothenburg, Sweden", date: "2025-03-28", svgIdx: 5
+        tags: ["Documentary", "Short Film", "Sports"], creator: { name: "Iris Fontaine", initials: "IF" }, location: "Gothenburg, Sweden", date: "2025-03-28", svgIdx: null, customSvg: '<img src="bc gif 12.gif" style="width:100%;height:100%;object-fit:cover;display:block">'
     },
     {
         id: 7, title: "Glitch Garden", summary: "An interactive art installation using generative code and live plant biometric sensors.",
         description: "Glitch Garden is a mixed-media installation where live plant biometric data drives generative visuals in p5.js. Visitors interact with the plants to shift the visual and audio environment in real time.\n\nTimeline: The installation premieres at Kunsthal Aarhus on July 18 as part of a group exhibition on ecology and technology. Build week starts July 7. Post-exhibition tour to Oslo and Helsinki planned.\n\nAll collaborators are listed as co-artists in the exhibition catalogue and share future commissions.",
         roles: ["Creative Coder", "Electronics / Arduino", "Sound Designer", "3D Artist"],
-        tags: ["Installation Art", "Generative", "Interactive"], creator: { name: "Sam Wu", initials: "SW" }, location: "Aarhus, Denmark", date: "2025-02-05", svgIdx: 6
+        tags: ["Installation Art", "Generative", "Interactive"], creator: { name: "Sam Wu", initials: "SW" }, location: "Aarhus, Denmark", date: "2025-02-05", svgIdx: null, customSvg: '<img src="bc gif 1.gif" style="width:100%;height:100%;object-fit:cover;display:block">'
     },
     {
         id: 8, title: "The Fold", summary: "Fashion editorial series exploring androgyny and architectural silhouettes. 6-issue run.",
         description: "The Fold is a high-concept fashion editorial series submitted to independent magazines including Acne Paper and the Finnish publication Taik. Issue 2 explores pleating and rigid fabric geometry.\n\nTimeline: Issue 2 shoot is the last weekend of May in Helsinki. Retouching and layout complete by June 20 for Taik's autumn issue.\n\nThis is an unpaid editorial project; all contributors receive high-resolution images for their portfolios, full credit, and print copies upon publication.",
         roles: ["Photographer", "Makeup Artist", "Stylist", "Retoucher"],
-        tags: ["Fashion", "Editorial", "Photography"], creator: { name: "Lila Marchetti", initials: "LM" }, location: "Helsinki, Finland", date: "2025-04-08", svgIdx: 7
+        tags: ["Fashion", "Editorial", "Photography"], creator: { name: "Lila Marchetti", initials: "LM" }, location: "Helsinki, Finland", date: "2025-04-08", svgIdx: null, customSvg: '<img src="bc gif 2.gif" style="width:100%;height:100%;object-fit:cover;display:block">'
     },
     {
         id: 9, title: "Stardrift", summary: "A 10-minute sci-fi short with practical miniature effects and an analog synth score.",
         description: "Stardrift is a quiet, optimistic sci-fi short about the last radio operator on a decommissioned deep-space relay station — built around practical miniatures and in-camera light effects.\n\nTimeline: Principal photography takes place over three weekends in May at a studio in Vilnius. Post-production runs June–August. Submitting to Fantastic Fest and the Lund Fantastisk Film Festival by September 1.\n\nBudget is 25,000 NOK total; composer receives 8,000 NOK and VFX receives 10,000 NOK.",
         roles: ["Composer", "VFX Artist", "Production Designer", "Director of Photography"],
-        tags: ["Short Film", "Sci-Fi", "Practical Effects"], creator: { name: "Noah Bell", initials: "NB" }, location: "Oslo, Norway", date: "2025-01-12", svgIdx: 8
+        tags: ["Short Film", "Sci-Fi", "Practical Effects"], creator: { name: "Noah Bell", initials: "NB" }, location: "Oslo, Norway", date: "2025-01-12", svgIdx: null, customSvg: '<img src="bc gif 11.gif" style="width:100%;height:100%;object-fit:cover;display:block">'
     },
     {
         id: 10, title: "Club Nowhere", summary: "A queer club night with live AV performances. Seeking VJs and visual collaborators.",
         description: "Club Nowhere is a monthly queer-centred club night featuring live AV performances alongside DJ sets at Bakken in Copenhagen — capacity around 300.\n\nTimeline: Onboarding new VJs and motion designers for May–August (4 events). Each collaborator prepares a 60–90 minute live set tailored to the night's theme. Briefing call 3 weeks before; tech rehearsal the afternoon of.\n\nAll performing collaborators are paid 1,500 DKK per night. After three events, recurring collaborators are offered a 6-month contract with a raise.",
         roles: ["VJ", "Graphic Designer", "Motion Designer", "Photographer"],
-        tags: ["Live Event", "AV Performance", "Queer Art"], creator: { name: "Remy Osei", initials: "RO" }, location: "Copenhagen, Denmark", date: "2025-03-01", svgIdx: 9
+        tags: ["Live Event", "AV Performance", "Queer Art"], creator: { name: "Remy Osei", initials: "RO" }, location: "Copenhagen, Denmark", date: "2025-03-01", svgIdx: null, customSvg: '<img src="bc gif 6.gif" style="width:100%;height:100%;object-fit:cover;display:block">'
     },
     {
         id: 11, title: "Deep Root", summary: "An environmental graphic novel set in a city built inside a living 10,000-year-old tree.",
         description: "Deep Root is a 120-page graphic novel set entirely within the inhabited rings of an ancient sentient tree. The script is complete and optioned by Drawn & Quarterly's Nordic distribution partner. Visual tone: Moebius crossed with Miyazaki.\n\nTimeline: Pencils and inks for the first 40 pages by August 2025 for editorial review. Full illustration schedule runs through April 2026, with publication targeted for autumn 2026. Work is divided into 40-page milestones with payment at each milestone.\n\nRates are competitive and based on page count; a full breakdown is available on request.",
         roles: ["Illustrator", "Letterer", "Colorist", "Cover Designer"],
-        tags: ["Graphic Novel", "Fantasy", "Comics"], creator: { name: "Tessa Grant", initials: "TG" }, location: "Bergen, Norway", date: "2025-02-22", svgIdx: 10
+        tags: ["Graphic Novel", "Fantasy", "Comics"], creator: { name: "Tessa Grant", initials: "TG" }, location: "Bergen, Norway", date: "2025-02-22", svgIdx: null, customSvg: '<img src="bc gif 14.gif" style="width:100%;height:100%;object-fit:cover;display:block">'
     },
     {
         id: 12, title: "Fold & Form", summary: "A ceramics and photography collab documenting a studio collection from raw clay to finished glaze.",
         description: "Fold & Form pairs a ceramic artist with a photographer and videographer to capture the full arc of creating a new ceramic collection — from the first wedge of clay through throwing, trimming, glazing, and the final kiln firing.\n\nTimeline: Four weeks in June at the Fiskars arts village residency in Finland (accommodation provided, 90 min from Helsinki). The resulting series and short film launch in a crowdfunding campaign in September.\n\nTravel and accommodation covered; contributors also receive a piece from the ceramic collection and a usage fee of 500 EUR each.",
         roles: ["Photographer", "Videographer", "Social Media Strategist"],
-        tags: ["Photography", "Ceramics", "Documentary"], creator: { name: "Aldo Cruz", initials: "AC" }, location: "Fiskars, Finland", date: "2025-04-20", svgIdx: 11
+        tags: ["Photography", "Ceramics", "Documentary"], creator: { name: "Aldo Cruz", initials: "AC" }, location: "Fiskars, Finland", date: "2025-04-20", svgIdx: null, customSvg: '<img src="bc gif 9.gif" style="width:100%;height:100%;object-fit:cover;display:block">'
     },
 ];
 
@@ -164,7 +168,7 @@ const MESSAGES_DATA = [
 ];
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
-let appliedIds = new Set();
+let appliedIds = new Set([2, 7]);
 let activeMsg = 0;
 let currentApplyId = null;
 let applyStep = 0;
@@ -580,6 +584,11 @@ function enterApp() {
 
 // ── PROFILE / CONNECT ──
 function showCreatorProfile(pid) {
+    // Multi-page setup: navigate to profile.html?pid=X if no SPA page-profile exists
+    if (!document.getElementById('page-profile')) {
+        window.location.href = 'profile.html?pid=' + pid;
+        return;
+    }
     const p = PROJECTS.find(x => x.id === pid);
     if (!p) return;
     document.getElementById('profileName').textContent = p.creator.name;
