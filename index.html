@@ -112,7 +112,8 @@
             color: var(--muted);
             border-bottom: 2.5px solid transparent;
             margin-bottom: -1.5px;
-            transition: color .15s, border-color .15s
+            transition: color .15s, border-color .15s;
+            pointer-events: auto !important
         }
 
         .si-tab.active {
@@ -121,11 +122,13 @@
         }
 
         .si-form {
-            display: none
+            display: none;
+            pointer-events: auto
         }
 
         .si-form.active {
-            display: block
+            display: block;
+            pointer-events: auto
         }
 
         .si-group {
@@ -172,7 +175,8 @@
             font-weight: 700;
             border: none;
             cursor: pointer;
-            transition: all .15s
+            transition: all .15s;
+            pointer-events: auto !important
         }
 
         .btn-primary {
@@ -1954,6 +1958,7 @@
         }
 
         .ls-auth-card {
+            pointer-events: auto;
             background: #fff;
             border-radius: 24px;
             padding: 40px 36px;
@@ -2272,6 +2277,8 @@
         }
     </style>
 </head>
+
+<body>
 
 <body>
 
@@ -3566,19 +3573,62 @@
         })();
     </script>
     <script>
-        // Fallback: ensure landing CTAs call the expected functions even if inline handlers fail
+        // COMPREHENSIVE BUTTON FIX: Ensure ALL buttons respond to clicks
         window.addEventListener('DOMContentLoaded', function () {
             try {
-                document.querySelectorAll('.ls-cta .btn, .landing-auth-btns .btn').forEach(btn => {
-                    // If inline onclick exists, keep it. Otherwise attempt to bind by role.
-                    if (!btn.onclick) {
-                        const txt = (btn.textContent || '').trim().toLowerCase();
-                        if (txt.includes('get started') || txt.includes('sign up')) btn.addEventListener('click', () => { if (typeof enterApp === 'function') enterApp(); });
-                        if (txt.includes('log in') || txt.includes('sign in')) btn.addEventListener('click', () => { if (typeof goToAuthSection === 'function') goToAuthSection(); });
+                // First, make sure all buttons have pointer-events: auto
+                function ensureButtonsClickable() {
+                    document.querySelectorAll('button, .btn, .si-tab, [onclick]').forEach(el => {
+                        el.style.pointerEvents = 'auto';
+                    });
+                }
+                ensureButtonsClickable();
+                
+                // Global delegation handler for all clicks
+                document.addEventListener('click', function(e) {
+                    const target = e.target.closest('button, .btn, .si-tab, [role="button"]');
+                    if (!target) return;
+                    
+                    // Trigger onclick attribute handler if it exists
+                    if (target.attributes.onclick) {
+                        const onclickAttr = target.attributes.onclick.value;
+                        if (onclickAttr && typeof Function === 'function') {
+                            try {
+                                new Function(onclickAttr).call(target);
+                            } catch(err) {
+                                console.warn('Error executing onclick handler:', err);
+                            }
+                        }
+                    }
+                }, true);
+                
+                // Specific binding for signin/landing buttons that might not have working onclick
+                document.querySelectorAll('button').forEach(btn => {
+                    const txt = (btn.textContent || '').trim().toLowerCase();
+                    if (!btn.getAttribute('data-bound')) {
+                        // Sign-in/create buttons
+                        if ((txt.includes('sign in') || txt.includes('create account') || txt.includes('sign up')) && !btn.onclick) {
+                            btn.addEventListener('click', (e) => {
+                                if (typeof enterApp === 'function') enterApp();
+                            });
+                            btn.setAttribute('data-bound', 'true');
+                        }
+                        // Tabs
+                        if (btn.classList.contains('si-tab')) {
+                            if (!btn.eventListener) {
+                                btn.addEventListener('click', (e) => {
+                                    const isLogin = btn.textContent.includes('Sign In');
+                                    if (typeof switchSiTab === 'function') {
+                                        switchSiTab(isLogin ? 'login' : 'register');
+                                    }
+                                });
+                                btn.eventListener = true;
+                            }
+                        }
                     }
                 });
             } catch (e) {
-                console.error('CTA fallback binding failed', e);
+                console.error('Button accessibility fix failed:', e);
             }
         });
     </script>
