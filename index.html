@@ -3365,9 +3365,9 @@
             if (!p) return;
             let coverHTML;
             if (id === 2) {
-                coverHTML = '<img src="user_photo_4.jpg" style="width:100%;object-fit:cover;display:block;max-height:360px;border-radius:12px" alt="Neon Fables">';
+                coverHTML = '<div class="detail-cover"><img src="user_photo_4.jpg" style="width:100%;object-fit:cover;display:block" alt="Neon Fables"></div>';
             } else if (id === 7) {
-                coverHTML = '<img src="bc gif 1.gif" style="width:100%;object-fit:cover;display:block;max-height:360px;border-radius:12px" alt="Glitch Garden">';
+                coverHTML = '<div class="detail-cover"><img src="bc gif 1.gif" style="width:100%;object-fit:cover;display:block" alt="Glitch Garden"></div>';
             } else {
                 const svg = p.svgIdx != null ? PROJECT_SVGS[p.svgIdx % 5] : (p.customSvg || PROJECT_SVGS[0]);
                 coverHTML = `<div class="detail-cover">${svg}</div>`;
